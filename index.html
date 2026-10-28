@@ -195,7 +195,7 @@ main{padding:14px 13px 0;max-width:740px;margin:0 auto}
 .field li{line-height:1.52}
 
 /* the first action line of each card reads loudest */
-.field.lead li:first-child{font-size:.93rem}
+
 .spec{display:flex;gap:1px;background:var(--line);border-radius:10px;
   overflow:hidden;margin-top:13px}
 .spec div{flex:1;background:#f4f1e9;padding:10px 5px;text-align:center;min-width:0}
@@ -205,6 +205,26 @@ main{padding:14px 13px 0;max-width:740px;margin:0 auto}
   text-transform:uppercase;color:var(--muted);margin-top:2px;
   white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 
+.field h4 .cnt{
+  margin-left:auto;font-size:.62rem;font-weight:700;letter-spacing:.5px;
+  background:var(--deep);color:#fff;padding:2px 7px;border-radius:20px;
+  text-transform:none;
+}
+ol.portals{margin:0;padding:0;list-style:none;counter-reset:none}
+ol.portals li{display:flex;gap:9px;align-items:flex-start;margin-bottom:9px;
+  font-size:.89rem;line-height:1.5}
+ol.portals li:last-child{margin-bottom:0}
+ol.portals li .pn{
+  flex:none;width:19px;height:19px;border-radius:50%;
+  background:var(--deep);color:#fff;
+  font-size:.66rem;font-weight:800;
+  display:flex;align-items:center;justify-content:center;
+  margin-top:.1em;
+}
+ol.portals li.pnote{padding-left:28px;color:var(--muted);font-size:.84rem}
+ol.portals li.pnote div{border-left:2px solid var(--line);padding-left:9px}
+ol.portals li.fs .pn{background:var(--accent)}
+ol.portals li.pnote.fs div{border-left-color:var(--accent)}
 .field ul{margin:0;padding:0;list-style:none}
 .field li{position:relative;padding-left:15px;margin-bottom:6px;font-size:.89rem;line-height:1.5}
 .field li:last-child{margin-bottom:0}
@@ -368,13 +388,11 @@ footer .line{width:30px;height:3px;background:var(--accent);border-radius:2px;ma
       <div class="t"><b>Shoulder</b><span>Scapulohumeral</span></div>
       <svg class="chev" viewBox="0 0 24 24"><path d="M7.4 8.6 12 13.2l4.6-4.6L18 10l-6 6-6-6z"/></svg></div>
     <div class="jbody">
-      <div class="spec"><div><b>18–20G</b><span>gauge</span></div><div><b>7–10 cm</b><span>length</span></div><div><b>US</b><span>mandatory</span></div></div>
+      <div class="spec"><div><b>18–20G</b><span>gauge</span></div><div><b>7–10 cm</b><span>length</span></div><div><b>2</b><span>portals</span></div></div>
       <div class="field"><h4><svg class="ic" viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20z"/></svg>Palpate</h4>
         <ul><li>The two prominences of the <span class="anat">greater tubercle</span>, and the notch between them</li><li><span class="anat">Infraspinatus tendon</span> — every approach is measured off it</li><li>Muscle atrophy and an abducted limb at rest</li><li><b>Effusion cannot be palpated here.</b> The capsule sits under thick muscle</li></ul></div>
-      <div class="field lead"><h4><svg class="ic" viewBox="0 0 24 24"><path d="M20.7 5.3 18.7 3.3a1 1 0 0 0-1.4 0l-2.3 2.3 3.4 3.4 2.3-2.3a1 1 0 0 0 0-1.4zM3 17.2V21h3.8L17.4 10.4 13.6 6.6 3 17.2z"/></svg>Needle in</h4>
-        <ul><li>Spinal needle, <b>caudolateral</b></li><li>Enter just caudal to the <span class="anat">infraspinatus tendon</span></li><li>Aim <b>craniomedially</b> into the caudal recess</li><li class="fs">Scope reference: <span class="num">1 cm</span> caudal to the tendon, <span class="num">1 cm</span> proximal to the caudal tubercle</li></ul></div>
-      <div class="field"><h4><svg class="ic" viewBox="0 0 24 24"><path d="M12 2 4 7v10l8 5 8-5V7l-8-5z"/></svg>Second needle</h4>
-        <ul><li>Second cannula into the same caudal recess</li></ul></div>
+      <div class="field lead"><h4><svg class="ic" viewBox="0 0 24 24"><path d="M20.7 5.3 18.7 3.3a1 1 0 0 0-1.4 0l-2.3 2.3 3.4 3.4 2.3-2.3a1 1 0 0 0 0-1.4zM3 17.2V21h3.8L17.4 10.4 13.6 6.6 3 17.2z"/></svg>Portals <span class="cnt">2 portals</span></h4>
+        <ol class="portals"><li class="p"><span class="pn">1</span><div><b>Caudolateral</b>, just caudal to the <span class="anat">infraspinatus tendon</span>, aimed <b>craniomedially</b> into the caudal recess. Spinal needle</div></li><li class="p"><span class="pn">2</span><div><b>Second cannula into the same caudal recess</b> — there is only one pouch worth entering here</div></li></ol></div>
       <div class="field"><h4><svg class="ic" viewBox="0 0 24 24"><path d="M12 2s6 6.5 6 11a6 6 0 0 1-12 0c0-4.5 6-11 6-11z"/></svg>Lavage</h4>
         <ul><li><span class="num">1–2 L</span> saline, two cannulas <span class="num">1.6–2.0 mm</span></li><li>Epidural or GA. Never standing</li></ul></div>
       <div class="cardsplit"></div>
@@ -392,13 +410,11 @@ footer .line{width:30px;height:3px;background:var(--accent);border-radius:2px;ma
       <div class="t"><b>Elbow</b><span>Cubital</span></div>
       <svg class="chev" viewBox="0 0 24 24"><path d="M7.4 8.6 12 13.2l4.6-4.6L18 10l-6 6-6-6z"/></svg></div>
     <div class="jbody">
-      <div class="spec"><div><b>18G</b><span>gauge</span></div><div><b>5–7 cm</b><span>length</span></div><div><b>craniomed.</b><span>aim</span></div></div>
+      <div class="spec"><div><b>18G</b><span>gauge</span></div><div><b>5–7 cm</b><span>length</span></div><div><b>2</b><span>portals</span></div></div>
       <div class="field"><h4><svg class="ic" viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20z"/></svg>Palpate</h4>
         <ul><li class="fs">The <b>palpable gap</b> between the <span class="anat">lateral humeral epicondyle</span> and the <span class="anat">tuber olecrani</span>. That gap is the target</li><li>The lateral collateral ligament runs between the two</li></ul></div>
-      <div class="field lead"><h4><svg class="ic" viewBox="0 0 24 24"><path d="M20.7 5.3 18.7 3.3a1 1 0 0 0-1.4 0l-2.3 2.3 3.4 3.4 2.3-2.3a1 1 0 0 0 0-1.4zM3 17.2V21h3.8L17.4 10.4 13.6 6.6 3 17.2z"/></svg>Needle in</h4>
-        <ul><li>Enter just caudal to the ligament's caudal border</li><li>Aim <b>craniomedially</b>, into the radiohumeral space</li></ul></div>
-      <div class="field"><h4><svg class="ic" viewBox="0 0 24 24"><path d="M12 2 4 7v10l8 5 8-5V7l-8-5z"/></svg>Second needle</h4>
-        <ul><li>The <span class="anat">caudomedial pouch</span>. <b>In sepsis this is not optional</b></li></ul></div>
+      <div class="field lead"><h4><svg class="ic" viewBox="0 0 24 24"><path d="M20.7 5.3 18.7 3.3a1 1 0 0 0-1.4 0l-2.3 2.3 3.4 3.4 2.3-2.3a1 1 0 0 0 0-1.4zM3 17.2V21h3.8L17.4 10.4 13.6 6.6 3 17.2z"/></svg>Portals <span class="cnt">2 portals</span></h4>
+        <ol class="portals"><li class="p"><span class="pn">1</span><div><b>Lateral:</b> just caudal to the caudal border of the lateral collateral ligament, aimed <b>craniomedially</b> into the radiohumeral space</div></li><li class="p"><span class="pn">2</span><div><b>Caudomedial pouch.</b> In sepsis this one is not optional</div></li></ol></div>
       <div class="field"><h4><svg class="ic" viewBox="0 0 24 24"><path d="M12 2s6 6.5 6 11a6 6 0 0 1-12 0c0-4.5 6-11 6-11z"/></svg>Lavage</h4>
         <ul><li><span class="num">1–2 L</span> saline</li></ul></div>
       <div class="cardsplit"></div>
@@ -416,13 +432,11 @@ footer .line{width:30px;height:3px;background:var(--accent);border-radius:2px;ma
       <div class="t"><b>Carpus</b><span>Antebrachiocarpal · middle · CMC</span></div>
       <svg class="chev" viewBox="0 0 24 24"><path d="M7.4 8.6 12 13.2l4.6-4.6L18 10l-6 6-6-6z"/></svg></div>
     <div class="jbody">
-      <div class="spec"><div><b>18–20G</b><span>gauge</span></div><div><b>flexed</b><span>position</span></div><div><b>dorsolat.</b><span>approach</span></div></div>
+      <div class="spec"><div><b>18–20G</b><span>gauge</span></div><div><b>flexed</b><span>position</span></div><div><b>4</b><span>portals</span></div></div>
       <div class="field"><h4><svg class="ic" viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20z"/></svg>Palpate</h4>
         <ul><li>Flex the carpus — the space opens as a <span class="anat">depression just distal to the radius</span></li><li>Effusion bulges either side of the extensor tendons</li><li>Filling also shows at the <span class="anat">palmar recess above the accessory carpal bone</span></li></ul></div>
-      <div class="field lead"><h4><svg class="ic" viewBox="0 0 24 24"><path d="M20.7 5.3 18.7 3.3a1 1 0 0 0-1.4 0l-2.3 2.3 3.4 3.4 2.3-2.3a1 1 0 0 0 0-1.4zM3 17.2V21h3.8L17.4 10.4 13.6 6.6 3 17.2z"/></svg>Needle in</h4>
-        <ul><li class="fs"><b>Flexed, from lateral or dorsolateral.</b> Not straight through the front</li><li class="fs"><b>Stay off the dorsal midline.</b> The <span class="anat">precarpal bursa</span> sits there, it is a common site of septic bursitis, and going through it can carry infection into the capsule</li><li>Tap each compartment separately. These are not one joint</li></ul></div>
-      <div class="field"><h4><svg class="ic" viewBox="0 0 24 24"><path d="M12 2 4 7v10l8 5 8-5V7l-8-5z"/></svg>Second needle</h4>
-        <ul><li>The <span class="anat">palmar pouches</span> — large, and where fibrin and pus collect</li></ul></div>
+      <div class="field lead"><h4><svg class="ic" viewBox="0 0 24 24"><path d="M20.7 5.3 18.7 3.3a1 1 0 0 0-1.4 0l-2.3 2.3 3.4 3.4 2.3-2.3a1 1 0 0 0 0-1.4zM3 17.2V21h3.8L17.4 10.4 13.6 6.6 3 17.2z"/></svg>Portals <span class="cnt">4 portals</span></h4>
+        <ol class="portals"><li class="p"><span class="pn">1</span><div><b>Antebrachiocarpal, dorsal</b> — flexed, from lateral or dorsolateral</div></li><li class="p"><span class="pn">2</span><div><b>Antebrachiocarpal, palmar pouch</b> — the exit for that compartment</div></li><li class="p"><span class="pn">3</span><div><b>Midcarpal, dorsal</b> — a separate cavity, so a separate tap</div></li><li class="p"><span class="pn">4</span><div><b>Midcarpal / CMC, palmar pouch</b> — these two always communicate, so one exit serves both</div></li><li class="pnote fs"><div>Count on <b>two per compartment</b>, not two for the carpus. Three cavities means up to six needles if all three are septic</div></li></ol></div>
       <div class="field"><h4><svg class="ic" viewBox="0 0 24 24"><path d="M12 2s6 6.5 6 11a6 6 0 0 1-12 0c0-4.5 6-11 6-11z"/></svg>Lavage</h4>
         <ul><li><span class="num">1–3 L</span>, two cannulas <span class="num">1.6–2.0 mm</span></li><li>Under IVRA + IVRLP</li></ul></div>
       <div class="cardsplit"></div>
@@ -440,13 +454,11 @@ footer .line{width:30px;height:3px;background:var(--accent);border-radius:2px;ma
       <div class="t"><b>Fetlock</b><span>Metacarpo-/metatarsophalangeal</span></div>
       <svg class="chev" viewBox="0 0 24 24"><path d="M7.4 8.6 12 13.2l4.6-4.6L18 10l-6 6-6-6z"/></svg></div>
     <div class="jbody">
-      <div class="spec"><div><b>19G</b><span>gauge</span></div><div><b>5–10 mL</b><span>capacity</span></div><div><b>2 cm</b><span>plantar depth</span></div></div>
+      <div class="spec"><div><b>19G</b><span>gauge</span></div><div><b>5–10 mL</b><span>capacity</span></div><div><b>4</b><span>portals</span></div></div>
       <div class="field"><h4><svg class="ic" viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20z"/></svg>Palpate</h4>
         <ul><li>The <span class="anat">dorsoproximal pouch</span> bulges with even slight effusion</li><li>It lies <span class="anat">abaxial to the common digital extensor tendon</span></li></ul></div>
-      <div class="field lead"><h4><svg class="ic" viewBox="0 0 24 24"><path d="M20.7 5.3 18.7 3.3a1 1 0 0 0-1.4 0l-2.3 2.3 3.4 3.4 2.3-2.3a1 1 0 0 0 0-1.4zM3 17.2V21h3.8L17.4 10.4 13.6 6.6 3 17.2z"/></svg>Needle in</h4>
-        <ul><li class="fs"><b>Dorsal pouch:</b> just proximal to the joint space, <span class="anat">lateral to the extensor tendon</span></li><li>Alternative: the angle between the <span class="anat">dorsal margin of P1</span> and the rounded metacarpal surface — insert abaxially, under the extensor tendon</li></ul></div>
-      <div class="field"><h4><svg class="ic" viewBox="0 0 24 24"><path d="M12 2 4 7v10l8 5 8-5V7l-8-5z"/></svg>Second needle</h4>
-        <ul><li><b>Plantar triangle</b>, bounded by</li><li class="sub">— the <span class="anat">caudal margin of the cannon bone</span></li><li class="sub">— the <span class="anat">proximal edge of the abaxial sesamoid</span></li><li class="sub">— the <span class="anat">abaxial contour of the interosseus</span></li><li>Flex the fetlock, then <span class="num">~2 cm</span> into the centre, <b>axiodistally</b></li></ul></div>
+      <div class="field lead"><h4><svg class="ic" viewBox="0 0 24 24"><path d="M20.7 5.3 18.7 3.3a1 1 0 0 0-1.4 0l-2.3 2.3 3.4 3.4 2.3-2.3a1 1 0 0 0 0-1.4zM3 17.2V21h3.8L17.4 10.4 13.6 6.6 3 17.2z"/></svg>Portals <span class="cnt">4 portals</span></h4>
+        <ol class="portals"><li class="p fs"><span class="pn">1</span><div><b>Dorsal pouch</b> — just proximal to the joint space, <span class="anat">lateral to the extensor tendon</span></div></li><li class="p"><span class="pn">2</span><div><b>Plantar triangle</b> — flex the fetlock, <span class="num">~2 cm</span> into its centre, <b>axiodistally</b></div></li><li class="p fs"><span class="pn">3</span><div><b>Repeat both on the other digit</b> if it is involved. There is no dorsal connection between lateral and medial, so the pair does not drain the pair</div></li></ol></div>
       <div class="field"><h4><svg class="ic" viewBox="0 0 24 24"><path d="M12 2s6 6.5 6 11a6 6 0 0 1-12 0c0-4.5 6-11 6-11z"/></svg>Lavage</h4>
         <ul><li class="fs"><b>Fill first, then open the exit.</b> Distend the dorsal pouch, leave the syringe attached, and only then place the second needle opposite. That is what gives true through-flow</li><li><span class="num">1–2.5 L</span> ± povidone-iodine <span class="num">0.1%</span></li><li class="fs">Or enter the plantar pouch directly</li></ul></div>
       <div class="cardsplit"></div>
@@ -464,13 +476,11 @@ footer .line{width:30px;height:3px;background:var(--accent);border-radius:2px;ma
       <div class="t"><b>Carpal sheaths</b><span>Extensor + flexor</span></div>
       <svg class="chev" viewBox="0 0 24 24"><path d="M7.4 8.6 12 13.2l4.6-4.6L18 10l-6 6-6-6z"/></svg></div>
     <div class="jbody">
-      <div class="spec"><div><b>18–20G</b><span>gauge</span></div><div><b>along</b><span>fibres</span></div><div><b>US</b><span>guided</span></div></div>
+      <div class="spec"><div><b>18–20G</b><span>gauge</span></div><div><b>along</b><span>fibres</span></div><div><b>2</b><span>portals</span></div></div>
       <div class="field"><h4><svg class="ic" viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20z"/></svg>Palpate</h4>
         <ul><li>Swelling runs <b>along a tendon</b>, above and below the carpus</li><li>Not the dorsal, joint-centred bulge</li><li><b>Have sheaths:</b> ext. carpi obliquus, the digital extensors, flexor carpi radialis</li><li><b>Do not:</b> ext. carpi radialis, ulnaris lateralis</li></ul></div>
-      <div class="field lead"><h4><svg class="ic" viewBox="0 0 24 24"><path d="M20.7 5.3 18.7 3.3a1 1 0 0 0-1.4 0l-2.3 2.3 3.4 3.4 2.3-2.3a1 1 0 0 0 0-1.4zM3 17.2V21h3.8L17.4 10.4 13.6 6.6 3 17.2z"/></svg>Needle in</h4>
-        <ul><li>Into the lumen at its widest point on ultrasound</li><li><b>Parallel to the tendon fibres</b></li></ul></div>
-      <div class="field"><h4><svg class="ic" viewBox="0 0 24 24"><path d="M12 2 4 7v10l8 5 8-5V7l-8-5z"/></svg>Second needle</h4>
-        <ul><li>Second portal at the far end of the lumen</li></ul></div>
+      <div class="field lead"><h4><svg class="ic" viewBox="0 0 24 24"><path d="M20.7 5.3 18.7 3.3a1 1 0 0 0-1.4 0l-2.3 2.3 3.4 3.4 2.3-2.3a1 1 0 0 0 0-1.4zM3 17.2V21h3.8L17.4 10.4 13.6 6.6 3 17.2z"/></svg>Portals <span class="cnt">2 portals</span></h4>
+        <ol class="portals"><li class="p"><span class="pn">1</span><div>Into the lumen at its widest point on ultrasound, <b>parallel to the tendon fibres</b></div></li><li class="p"><span class="pn">2</span><div>Second portal at the far end of the same lumen</div></li><li class="pnote"><div><b>One pair per sheath.</b> Several sheaths can be involved at once, and they do not communicate</div></li></ol></div>
       <div class="field"><h4><svg class="ic" viewBox="0 0 24 24"><path d="M12 2s6 6.5 6 11a6 6 0 0 1-12 0c0-4.5 6-11 6-11z"/></svg>Lavage</h4>
         <ul><li>Small — the lumen sets the volume</li><li>Septic cases usually need open debridement and drains</li></ul></div>
       <div class="cardsplit"></div>
@@ -488,13 +498,11 @@ footer .line{width:30px;height:3px;background:var(--accent);border-radius:2px;ma
       <div class="t"><b>Precarpal bursa</b><span>Hygroma</span></div>
       <svg class="chev" viewBox="0 0 24 24"><path d="M7.4 8.6 12 13.2l4.6-4.6L18 10l-6 6-6-6z"/></svg></div>
     <div class="jbody">
-      <div class="spec"><div><b>16–18G</b><span>gauge</span></div><div><b>central</b><span>aspirate</span></div><div><b>extra-art.</b><span>confirm</span></div></div>
+      <div class="spec"><div><b>16–18G</b><span>gauge</span></div><div><b>central</b><span>aspirate</span></div><div><b>1</b><span>portal</span></div></div>
       <div class="field"><h4><svg class="ic" viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20z"/></svg>Palpate</h4>
         <ul><li>Soft, fluctuant, <b>superficial</b> swelling on the <span class="anat">dorsal carpus</span></li><li>Runs from the midcarpal joint to just below the metacarpal tuberosity</li><li>Begins as <span class="anat">hairless, hyperkeratotic skin</span> — the cubicle is too short</li><li>Can reach the size of a man's head</li></ul></div>
-      <div class="field lead"><h4><svg class="ic" viewBox="0 0 24 24"><path d="M20.7 5.3 18.7 3.3a1 1 0 0 0-1.4 0l-2.3 2.3 3.4 3.4 2.3-2.3a1 1 0 0 0 0-1.4zM3 17.2V21h3.8L17.4 10.4 13.6 6.6 3 17.2z"/></svg>Needle in</h4>
-        <ul><li>Central aspiration, strict asepsis</li><li>Cytology and culture if infection is suspected</li></ul></div>
-      <div class="field"><h4><svg class="ic" viewBox="0 0 24 24"><path d="M12 2 4 7v10l8 5 8-5V7l-8-5z"/></svg>Second needle</h4>
-        <ul><li><b>Confirm it is extra-articular before you drain.</b> Ultrasound or contrast</li></ul></div>
+      <div class="field lead"><h4><svg class="ic" viewBox="0 0 24 24"><path d="M20.7 5.3 18.7 3.3a1 1 0 0 0-1.4 0l-2.3 2.3 3.4 3.4 2.3-2.3a1 1 0 0 0 0-1.4zM3 17.2V21h3.8L17.4 10.4 13.6 6.6 3 17.2z"/></svg>Portals <span class="cnt">1 portal</span></h4>
+        <ol class="portals"><li class="p"><span class="pn">1</span><div>Central aspiration, strict asepsis. <b>One needle</b> — this is a sampling procedure, not a lavage</div></li><li class="pnote fs"><div>Enter from the side, not through the dorsal midline</div></li></ol></div>
       <div class="field"><h4><svg class="ic" viewBox="0 0 24 24"><path d="M12 2s6 6.5 6 11a6 6 0 0 1-12 0c0-4.5 6-11 6-11z"/></svg>Lavage</h4>
         <ul><li>Excise when enlarged</li><li><b>Do not breach the synovial structures at surgery</b></li></ul></div>
       <div class="cardsplit"></div>
@@ -512,11 +520,11 @@ footer .line{width:30px;height:3px;background:var(--accent);border-radius:2px;ma
       <div class="t"><b>Olecranon &amp; acquired bursae</b><span>Capped elbow · presternal</span></div>
       <svg class="chev" viewBox="0 0 24 24"><path d="M7.4 8.6 12 13.2l4.6-4.6L18 10l-6 6-6-6z"/></svg></div>
     <div class="jbody">
-      <div class="spec"><div><b>16–18G</b><span>gauge</span></div><div><b>central</b><span>aspirate</span></div><div><b>US</b><span>first</span></div></div>
+      <div class="spec"><div><b>16–18G</b><span>gauge</span></div><div><b>central</b><span>aspirate</span></div><div><b>1</b><span>portal</span></div></div>
       <div class="field"><h4><svg class="ic" viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20z"/></svg>Palpate</h4>
         <ul><li>Firm or fluctuant swelling over the <span class="anat">point of the elbow</span> or the <span class="anat">sternum</span></li><li>Pressure lesions, same mechanism as the carpal hygroma</li><li>The subcutaneous bursa is superficial, on the caudal olecranon</li><li>The bursa of triceps brachii sits deeper, under the terminal tendon</li></ul></div>
-      <div class="field lead"><h4><svg class="ic" viewBox="0 0 24 24"><path d="M20.7 5.3 18.7 3.3a1 1 0 0 0-1.4 0l-2.3 2.3 3.4 3.4 2.3-2.3a1 1 0 0 0 0-1.4zM3 17.2V21h3.8L17.4 10.4 13.6 6.6 3 17.2z"/></svg>Needle in</h4>
-        <ul><li>Central aspiration, once ultrasound confirms fluid</li><li>Viscous and straw-coloured if aseptic. Turbidity changes everything</li></ul></div>
+      <div class="field lead"><h4><svg class="ic" viewBox="0 0 24 24"><path d="M20.7 5.3 18.7 3.3a1 1 0 0 0-1.4 0l-2.3 2.3 3.4 3.4 2.3-2.3a1 1 0 0 0 0-1.4zM3 17.2V21h3.8L17.4 10.4 13.6 6.6 3 17.2z"/></svg>Portals <span class="cnt">1 portal</span></h4>
+        <ol class="portals"><li class="p"><span class="pn">1</span><div>Central aspiration once ultrasound confirms fluid. <b>One needle</b></div></li></ol></div>
       <div class="field"><h4><svg class="ic" viewBox="0 0 24 24"><path d="M12 2s6 6.5 6 11a6 6 0 0 1-12 0c0-4.5 6-11 6-11z"/></svg>Lavage</h4>
         <ul><li>Excision works well for the chronic fibrous form</li></ul></div>
       <div class="cardsplit"></div>
@@ -545,13 +553,11 @@ footer .line{width:30px;height:3px;background:var(--accent);border-radius:2px;ma
       <div class="t"><b>PIP — pastern</b><span>Proximal interphalangeal</span></div>
       <svg class="chev" viewBox="0 0 24 24"><path d="M7.4 8.6 12 13.2l4.6-4.6L18 10l-6 6-6-6z"/></svg></div>
     <div class="jbody">
-      <div class="spec"><div><b>18–20G</b><span>gauge</span></div><div><b>90°</b><span>to long axis</span></div><div><b>tight</b><span>joint</span></div></div>
+      <div class="spec"><div><b>18–20G</b><span>gauge</span></div><div><b>90°</b><span>to long axis</span></div><div><b>2</b><span>portals</span></div></div>
       <div class="field"><h4><svg class="ic" viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20z"/></svg>Palpate</h4>
         <ul><li>Localised swelling <span class="anat">between fetlock and coronary band</span></li><li>Usually follows a penetrating interdigital wound</li><li class="fs"><b>A very tight joint.</b> Realistically only enterable when badly affected or distended</li></ul></div>
-      <div class="field lead"><h4><svg class="ic" viewBox="0 0 24 24"><path d="M20.7 5.3 18.7 3.3a1 1 0 0 0-1.4 0l-2.3 2.3 3.4 3.4 2.3-2.3a1 1 0 0 0 0-1.4zM3 17.2V21h3.8L17.4 10.4 13.6 6.6 3 17.2z"/></svg>Needle in</h4>
-        <ul><li><b>Dorsoabaxial</b>, or side-adjacent</li><li><b>Perpendicular to the long axis of the pastern</b></li><li class="fs"><b>Position carefully, or use ultrasound.</b> The commonest error is landing in the tendon sheath</li></ul></div>
-      <div class="field"><h4><svg class="ic" viewBox="0 0 24 24"><path d="M12 2 4 7v10l8 5 8-5V7l-8-5z"/></svg>Second needle</h4>
-        <ul><li>An opposing needle, abaxial or axial</li></ul></div>
+      <div class="field lead"><h4><svg class="ic" viewBox="0 0 24 24"><path d="M20.7 5.3 18.7 3.3a1 1 0 0 0-1.4 0l-2.3 2.3 3.4 3.4 2.3-2.3a1 1 0 0 0 0-1.4zM3 17.2V21h3.8L17.4 10.4 13.6 6.6 3 17.2z"/></svg>Portals <span class="cnt">2 portals</span></h4>
+        <ol class="portals"><li class="p"><span class="pn">1</span><div><b>Dorsoabaxial</b>, or side-adjacent, <b>perpendicular to the long axis</b> of the pastern</div></li><li class="p"><span class="pn">2</span><div>An <b>opposing needle</b>, abaxial or axial</div></li><li class="pnote fs"><div>Position carefully or use ultrasound. The commonest error is landing in the tendon sheath</div></li></ol></div>
       <div class="field"><h4><svg class="ic" viewBox="0 0 24 24"><path d="M12 2s6 6.5 6 11a6 6 0 0 1-12 0c0-4.5 6-11 6-11z"/></svg>Lavage</h4>
         <ul><li><span class="num">0.5–1 L</span> until the efflux runs clear</li><li>IVRA with a tourniquet</li></ul></div>
       <div class="cardsplit"></div>
@@ -569,13 +575,11 @@ footer .line{width:30px;height:3px;background:var(--accent);border-radius:2px;ma
       <div class="t"><b>DIP — coffin</b><span>Distal interphalangeal</span></div>
       <svg class="chev" viewBox="0 0 24 24"><path d="M7.4 8.6 12 13.2l4.6-4.6L18 10l-6 6-6-6z"/></svg></div>
     <div class="jbody">
-      <div class="spec"><div><b>~3 mL</b><span>capacity</span></div><div><b>5 cm</b><span>length</span></div><div><b>60°</b><span>to coronet</span></div></div>
+      <div class="spec"><div><b>~3 mL</b><span>capacity</span></div><div><b>5 cm</b><span>length</span></div><div><b>2</b><span>portals</span></div></div>
       <div class="field"><h4><svg class="ic" viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20z"/></svg>Palpate</h4>
         <ul><li>Painful swelling at the <span class="anat">caudal third of the abaxial coronet</span></li><li>A <span class="anat">draining tract at the dorsal coronary band</span> is near-diagnostic</li><li>Grade 4–5 lame</li><li>Usually secondary to white line disease, sole ulcer or interdigital phlegmon</li></ul></div>
-      <div class="field lead"><h4><svg class="ic" viewBox="0 0 24 24"><path d="M20.7 5.3 18.7 3.3a1 1 0 0 0-1.4 0l-2.3 2.3 3.4 3.4 2.3-2.3a1 1 0 0 0 0-1.4zM3 17.2V21h3.8L17.4 10.4 13.6 6.6 3 17.2z"/></svg>Needle in</h4>
-        <ul><li class="fs"><b>Smaller needle as standard.</b> <span class="num">14G</span> only when there is pus or heavy effusion</li><li>Dorsoproximal to the coronary band, at <span class="num">60°</span> to it, axial or abaxial to the extensor</li><li class="fs"><b>Aim at the tip of the opposite claw.</b> Enter the dorsal part of the joint space, between the middle and palmar thirds of the claw</li></ul></div>
-      <div class="field"><h4><svg class="ic" viewBox="0 0 24 24"><path d="M12 2 4 7v10l8 5 8-5V7l-8-5z"/></svg>Second needle</h4>
-        <ul><li><b>Palmar/plantar to the abaxial collateral ligament</b></li></ul></div>
+      <div class="field lead"><h4><svg class="ic" viewBox="0 0 24 24"><path d="M20.7 5.3 18.7 3.3a1 1 0 0 0-1.4 0l-2.3 2.3 3.4 3.4 2.3-2.3a1 1 0 0 0 0-1.4zM3 17.2V21h3.8L17.4 10.4 13.6 6.6 3 17.2z"/></svg>Portals <span class="cnt">2 portals</span></h4>
+        <ol class="portals"><li class="p fs"><span class="pn">1</span><div><b>Dorsal:</b> dorsoproximal to the coronary band at <span class="num">60°</span>, axial or abaxial to the extensor. <b>Aim at the tip of the opposite claw</b></div></li><li class="p"><span class="pn">2</span><div><b>Palmar/plantar to the abaxial collateral ligament</b></div></li><li class="pnote fs"><div>Smaller needle as standard. <span class="num">14G</span> only when there is pus or heavy effusion</div></li></ol></div>
       <div class="field"><h4><svg class="ic" viewBox="0 0 24 24"><path d="M12 2s6 6.5 6 11a6 6 0 0 1-12 0c0-4.5 6-11 6-11z"/></svg>Lavage</h4>
         <ul><li><span class="num">~1 L</span> until clear and free of fibrin</li><li>IVRA + IVRLP</li></ul></div>
       <div class="cardsplit"></div>
@@ -593,13 +597,11 @@ footer .line{width:30px;height:3px;background:var(--accent);border-radius:2px;ma
       <div class="t"><b>Digital flexor sheath</b><span>DFTS</span></div>
       <svg class="chev" viewBox="0 0 24 24"><path d="M7.4 8.6 12 13.2l4.6-4.6L18 10l-6 6-6-6z"/></svg></div>
     <div class="jbody">
-      <div class="spec"><div><b>18G</b><span>gauge</span></div><div><b>45°</b><span>proximal</span></div><div><b>90°</b><span>distal</span></div></div>
+      <div class="spec"><div><b>18G</b><span>gauge</span></div><div><b>45°</b><span>proximal</span></div><div><b>2</b><span>portals</span></div></div>
       <div class="field"><h4><svg class="ic" viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20z"/></svg>Palpate</h4>
         <ul><li><b>Elongated</b> swelling along the palmar fetlock, running proximally</li><li>Not the round, joint-centred bulge</li><li>Spans the distal third of the cannon to the coronary band of the heel bulbs</li></ul></div>
-      <div class="field lead"><h4><svg class="ic" viewBox="0 0 24 24"><path d="M20.7 5.3 18.7 3.3a1 1 0 0 0-1.4 0l-2.3 2.3 3.4 3.4 2.3-2.3a1 1 0 0 0 0-1.4zM3 17.2V21h3.8L17.4 10.4 13.6 6.6 3 17.2z"/></svg>Needle in</h4>
-        <ul><li class="fs"><b>Proximal entry:</b> two finger-widths proximal to the <span class="anat">dewclaws</span>. Advance at <span class="num">45°</span> until the first resistance, then <b>a distinct pop</b> as it enters</li><li class="fs"><b>Distal entry:</b> midway between the <span class="anat">dewclaws</span> and the <span class="anat">coronary band</span>, straight in at <span class="num">90°</span></li><li>Alternative: abaxially into the <span class="anat">concavity between the tendons and the interosseus</span>, fetlock flexed</li></ul></div>
-      <div class="field"><h4><svg class="ic" viewBox="0 0 24 24"><path d="M12 2 4 7v10l8 5 8-5V7l-8-5z"/></svg>Second needle</h4>
-        <ul><li><b>Closed irrigation fails here.</b> Plan open debridement and drainage</li><li>Through the sheath into the fetlock: <span class="num">3 cm</span> incision, between two branches of the medial interosseus, then <span class="num">3 L</span> via a dorsal needle</li></ul></div>
+      <div class="field lead"><h4><svg class="ic" viewBox="0 0 24 24"><path d="M20.7 5.3 18.7 3.3a1 1 0 0 0-1.4 0l-2.3 2.3 3.4 3.4 2.3-2.3a1 1 0 0 0 0-1.4zM3 17.2V21h3.8L17.4 10.4 13.6 6.6 3 17.2z"/></svg>Portals <span class="cnt">2 portals</span></h4>
+        <ol class="portals"><li class="p fs"><span class="pn">1</span><div><b>Proximal:</b> two finger-widths proximal to the <span class="anat">dewclaws</span>, at <span class="num">45°</span> until the first resistance, then <b>a distinct pop</b> as it enters</div></li><li class="p fs"><span class="pn">2</span><div><b>Distal:</b> midway between the <span class="anat">dewclaws</span> and the <span class="anat">coronary band</span>, straight in at <span class="num">90°</span></div></li><li class="pnote"><div>Alternative proximal site: abaxially into the <span class="anat">concavity between the tendons and the interosseus</span>, fetlock flexed</div></li></ol></div>
       <div class="field"><h4><svg class="ic" viewBox="0 0 24 24"><path d="M12 2s6 6.5 6 11a6 6 0 0 1-12 0c0-4.5 6-11 6-11z"/></svg>Lavage</h4>
         <ul><li>Volume is not the limit. Access to both compartments is</li></ul></div>
       <div class="cardsplit"></div>
@@ -628,13 +630,11 @@ footer .line{width:30px;height:3px;background:var(--accent);border-radius:2px;ma
       <div class="t"><b>Hip</b><span>Coxofemoral</span></div>
       <svg class="chev" viewBox="0 0 24 24"><path d="M7.4 8.6 12 13.2l4.6-4.6L18 10l-6 6-6-6z"/></svg></div>
     <div class="jbody">
-      <div class="spec"><div><b>16–18G</b><span>spinal</span></div><div><b>15 cm+</b><span>length</span></div><div><b>convex</b><span>US probe</span></div></div>
+      <div class="spec"><div><b>16–18G</b><span>spinal</span></div><div><b>15 cm+</b><span>length</span></div><div><b>2</b><span>portals</span></div></div>
       <div class="field"><h4><svg class="ic" viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20z"/></svg>Palpate</h4>
         <ul><li><span class="anat">Greater trochanter</span> — the only anchor you have</li><li>Gluteal atrophy supports the diagnosis</li><li><b>Effusion is not palpable at all</b></li></ul></div>
-      <div class="field lead"><h4><svg class="ic" viewBox="0 0 24 24"><path d="M20.7 5.3 18.7 3.3a1 1 0 0 0-1.4 0l-2.3 2.3 3.4 3.4 2.3-2.3a1 1 0 0 0 0-1.4zM3 17.2V21h3.8L17.4 10.4 13.6 6.6 3 17.2z"/></svg>Needle in</h4>
-        <ul><li class="fs"><b>Ultrasound with a convex probe.</b> This joint is buried under heavy muscle and blind tapping is guesswork</li><li>Long, large-gauge needle, entering <b>proximal to the trochanter major</b></li><li>Dorsolateral, directed <b>ventromedially</b></li></ul></div>
-      <div class="field"><h4><svg class="ic" viewBox="0 0 24 24"><path d="M12 2 4 7v10l8 5 8-5V7l-8-5z"/></svg>Second needle</h4>
-        <ul><li>Lavage is possible but difficult, under epidural</li><li>Arthrotomy is not a field procedure</li></ul></div>
+      <div class="field lead"><h4><svg class="ic" viewBox="0 0 24 24"><path d="M20.7 5.3 18.7 3.3a1 1 0 0 0-1.4 0l-2.3 2.3 3.4 3.4 2.3-2.3a1 1 0 0 0 0-1.4zM3 17.2V21h3.8L17.4 10.4 13.6 6.6 3 17.2z"/></svg>Portals <span class="cnt">2 portals</span></h4>
+        <ol class="portals"><li class="p fs"><span class="pn">1</span><div><b>Dorsolateral, proximal to the trochanter major</b>, directed <b>ventromedially</b>. Long, large-gauge needle, <b>convex probe guidance</b></div></li><li class="p"><span class="pn">2</span><div>Second needle alongside the first for through-flow — difficult, and under epidural</div></li></ol></div>
       <div class="cardsplit"></div>
       <div class="field"><h4><svg class="ic" viewBox="0 0 24 24"><path d="M12 2 4 7v10l8 5 8-5V7l-8-5zm0 2.3 5.5 3.4L12 11 6.5 7.7 12 4.3z"/></svg>Compartments</h4>
         <ul><li>Simple joint, one cavity</li><li>Ligaments: transverse acetabular, acetabular labrum, ligament of the head of the femur</li><li><b>No accessory ligament</b> in cattle, unlike the horse</li></ul></div>
@@ -650,13 +650,11 @@ footer .line{width:30px;height:3px;background:var(--accent);border-radius:2px;ma
       <div class="t"><b>Stifle</b><span>Femoropatellar + femorotibial</span></div>
       <svg class="chev" viewBox="0 0 24 24"><path d="M7.4 8.6 12 13.2l4.6-4.6L18 10l-6 6-6-6z"/></svg></div>
     <div class="jbody">
-      <div class="spec"><div><b>20–60 mL</b><span>capacity</span></div><div><b>4 cm</b><span>above tuberosity</span></div><div><b>7–9 cm</b><span>length</span></div></div>
+      <div class="spec"><div><b>20–60 mL</b><span>capacity</span></div><div><b>4 cm</b><span>above tuberosity</span></div><div><b>4</b><span>portals</span></div></div>
       <div class="field"><h4><svg class="ic" viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20z"/></svg>Palpate</h4>
         <ul><li><span class="anat">Patella</span>, the <span class="anat">three patellar ligaments</span>, the <span class="anat">tibial tuberosity</span></li><li>The lateral parapatellar pouch fills first</li></ul></div>
-      <div class="field lead"><h4><svg class="ic" viewBox="0 0 24 24"><path d="M20.7 5.3 18.7 3.3a1 1 0 0 0-1.4 0l-2.3 2.3 3.4 3.4 2.3-2.3a1 1 0 0 0 0-1.4zM3 17.2V21h3.8L17.4 10.4 13.6 6.6 3 17.2z"/></svg>Needle in</h4>
-        <ul><li><b>Femoropatellar:</b> <span class="num">4 cm</span> proximal to the <span class="anat">tibial tuberosity</span>, between the medial and middle patellar ligaments</li><li class="fs">Three workable routes:</li><li class="sub">— lateral to the patellar ligament</li><li class="sub">— medial to it</li><li class="sub">— directly proximal, behind the patella</li></ul></div>
-      <div class="field"><h4><svg class="ic" viewBox="0 0 24 24"><path d="M12 2 4 7v10l8 5 8-5V7l-8-5z"/></svg>Second needle</h4>
-        <ul><li class="fs"><b>Femorotibial:</b> locate the <span class="anat">tibial tuberosity</span> and the <span class="anat">condyles</span>, then enter the joint space lateral or medial to the patellar ligament</li><li>Or, as the published landmark: the <span class="anat">extensor groove of the tibia</span>, on the border of the peroneus tertius tendon</li></ul></div>
+      <div class="field lead"><h4><svg class="ic" viewBox="0 0 24 24"><path d="M20.7 5.3 18.7 3.3a1 1 0 0 0-1.4 0l-2.3 2.3 3.4 3.4 2.3-2.3a1 1 0 0 0 0-1.4zM3 17.2V21h3.8L17.4 10.4 13.6 6.6 3 17.2z"/></svg>Portals <span class="cnt">4 portals</span></h4>
+        <ol class="portals"><li class="p"><span class="pn">1</span><div><b>Femoropatellar:</b> <span class="num">4 cm</span> proximal to the <span class="anat">tibial tuberosity</span>, between the medial and middle patellar ligaments</div></li><li class="p fs"><span class="pn">2</span><div>Also workable: lateral to the patellar ligament, medial to it, or directly behind the patella</div></li><li class="p fs"><span class="pn">3</span><div><b>Femorotibial:</b> find the <span class="anat">tibial tuberosity</span> and the <span class="anat">condyles</span>, then enter lateral or medial to the patellar ligament</div></li><li class="p"><span class="pn">4</span><div><b>Lateral femorotibial needs its own pair</b> — it communicates with nothing. Published landmark: the <span class="anat">extensor groove of the tibia</span>, on the border of the peroneus tertius tendon</div></li></ol></div>
       <div class="field"><h4><svg class="ic" viewBox="0 0 24 24"><path d="M12 2s6 6.5 6 11a6 6 0 0 1-12 0c0-4.5 6-11 6-11z"/></svg>Lavage</h4>
         <ul><li><span class="num">2–4 L</span></li><li>Epidural, or GA in calves</li></ul></div>
       <div class="cardsplit"></div>
@@ -674,13 +672,11 @@ footer .line{width:30px;height:3px;background:var(--accent);border-radius:2px;ma
       <div class="t"><b>Tarsocrural</b><span>Tibiotarsal</span></div>
       <svg class="chev" viewBox="0 0 24 24"><path d="M7.4 8.6 12 13.2l4.6-4.6L18 10l-6 6-6-6z"/></svg></div>
     <div class="jbody">
-      <div class="spec"><div><b>16–18G</b><span>gauge</span></div><div><b>standing</b><span>possible</span></div><div><b>2 recesses</b><span>to lavage</span></div></div>
+      <div class="spec"><div><b>16–18G</b><span>gauge</span></div><div><b>standing</b><span>possible</span></div><div><b>3</b><span>portals</span></div></div>
       <div class="field"><h4><svg class="ic" viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20z"/></svg>Palpate</h4>
         <ul><li class="fs"><b>The “small hole”.</b> A depression you can feel <span class="anat">dorsomedially on a standing cow</span>, between the tibia, the tarsal bones and the muscle tendon. That is the site</li><li>Or trace from the <span class="anat">distal end of the lateral malleolus</span> forward to the <span class="anat">cranial edge of the tibia</span>, until the <span class="anat">talus</span> is felt</li><li>Dorsal, caudolateral and caudomedial recesses all distend markedly</li></ul></div>
-      <div class="field lead"><h4><svg class="ic" viewBox="0 0 24 24"><path d="M20.7 5.3 18.7 3.3a1 1 0 0 0-1.4 0l-2.3 2.3 3.4 3.4 2.3-2.3a1 1 0 0 0 0-1.4zM3 17.2V21h3.8L17.4 10.4 13.6 6.6 3 17.2z"/></svg>Needle in</h4>
-        <ul><li><b>Dorsomedial recess</b> — best for both diagnostic aspiration and flushing</li><li>Dorsolateral is the better scope portal</li></ul></div>
-      <div class="field"><h4><svg class="ic" viewBox="0 0 24 24"><path d="M12 2 4 7v10l8 5 8-5V7l-8-5z"/></svg>Second needle</h4>
-        <ul><li><b>Plantarolateral</b>, into the plantar recess</li><li>From here <b>lavage works in the standing animal</b></li><li><b>Puncture at least two diagonal recesses, cranial to caudal</b></li></ul></div>
+      <div class="field lead"><h4><svg class="ic" viewBox="0 0 24 24"><path d="M20.7 5.3 18.7 3.3a1 1 0 0 0-1.4 0l-2.3 2.3 3.4 3.4 2.3-2.3a1 1 0 0 0 0-1.4zM3 17.2V21h3.8L17.4 10.4 13.6 6.6 3 17.2z"/></svg>Portals <span class="cnt">3 portals</span></h4>
+        <ol class="portals"><li class="p"><span class="pn">1</span><div><b>Dorsomedial recess</b> — best for aspiration and for flushing. <span class="anat">The “small hole”</span> on a standing cow</div></li><li class="p"><span class="pn">2</span><div><b>Plantarolateral</b>, into the plantar recess. From here lavage works <b>standing</b></div></li><li class="p"><span class="pn">3</span><div><b>Proximal intertarsal, separately</b> — dorsomedially, between the <span class="anat">medial collateral ligament</span> and the <span class="anat">medial branch of the cranial tibial tendon</span></div></li><li class="pnote"><div><b>At least two diagonal recesses, cranial to caudal.</b> Two needles do not flush this joint</div></li></ol></div>
       <div class="field"><h4><svg class="ic" viewBox="0 0 24 24"><path d="M12 2s6 6.5 6 11a6 6 0 0 1-12 0c0-4.5 6-11 6-11z"/></svg>Lavage</h4>
         <ul><li><span class="num">1.5–3 L</span></li><li>Under IVRA + IVRLP</li></ul></div>
       <div class="cardsplit"></div>
@@ -698,13 +694,11 @@ footer .line{width:30px;height:3px;background:var(--accent);border-radius:2px;ma
       <div class="t"><b>Distal tarsal joints</b><span>Centrodistal · tarsometatarsal</span></div>
       <svg class="chev" viewBox="0 0 24 24"><path d="M7.4 8.6 12 13.2l4.6-4.6L18 10l-6 6-6-6z"/></svg></div>
     <div class="jbody">
-      <div class="spec"><div><b>20G</b><span>gauge</span></div><div><b>90°</b><span>to long axis</span></div><div><b>dorsomed.</b><span>approach</span></div></div>
+      <div class="spec"><div><b>20G</b><span>gauge</span></div><div><b>90°</b><span>to long axis</span></div><div><b>1</b><span>portal</span></div></div>
       <div class="field"><h4><svg class="ic" viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20z"/></svg>Palpate</h4>
         <ul><li>Narrow spaces on the <span class="anat">dorsomedial distal tarsus</span></li><li>Swelling is barely visible. This is a radiographic diagnosis</li></ul></div>
-      <div class="field lead"><h4><svg class="ic" viewBox="0 0 24 24"><path d="M20.7 5.3 18.7 3.3a1 1 0 0 0-1.4 0l-2.3 2.3 3.4 3.4 2.3-2.3a1 1 0 0 0 0-1.4zM3 17.2V21h3.8L17.4 10.4 13.6 6.6 3 17.2z"/></svg>Needle in</h4>
-        <ul><li><b>Dorsomedial</b>, short needle, <b>perpendicular to the long axis</b></li><li>Expect drops only</li></ul></div>
-      <div class="field"><h4><svg class="ic" viewBox="0 0 24 24"><path d="M12 2 4 7v10l8 5 8-5V7l-8-5z"/></svg>Second needle</h4>
-        <ul><li>Too small for meaningful through-and-through lavage. The aim is a sample</li></ul></div>
+      <div class="field lead"><h4><svg class="ic" viewBox="0 0 24 24"><path d="M20.7 5.3 18.7 3.3a1 1 0 0 0-1.4 0l-2.3 2.3 3.4 3.4 2.3-2.3a1 1 0 0 0 0-1.4zM3 17.2V21h3.8L17.4 10.4 13.6 6.6 3 17.2z"/></svg>Portals <span class="cnt">1 portal</span></h4>
+        <ol class="portals"><li class="p"><span class="pn">1</span><div><b>Dorsomedial</b>, short needle, <b>perpendicular to the long axis</b>. Expect drops only</div></li><li class="pnote"><div><b>One needle.</b> These cavities are too small for through-and-through lavage — the aim is a sample</div></li></ol></div>
       <div class="cardsplit"></div>
       <div class="field"><h4><svg class="ic" viewBox="0 0 24 24"><path d="M12 2 4 7v10l8 5 8-5V7l-8-5zm0 2.3 5.5 3.4L12 11 6.5 7.7 12 4.3z"/></svg>Compartments</h4>
         <ul><li>Tarsometatarsal ↔ distal intertarsal: <b>yes</b></li><li>Tarsocrural ↔ tarsometatarsal: <b>no open communication</b></li><li>Lavaging the hock from above does nothing down here</li></ul></div>
@@ -720,13 +714,11 @@ footer .line{width:30px;height:3px;background:var(--accent);border-radius:2px;ma
       <div class="t"><b>Tarsal sheath</b><span>Deep flexor sheath</span></div>
       <svg class="chev" viewBox="0 0 24 24"><path d="M7.4 8.6 12 13.2l4.6-4.6L18 10l-6 6-6-6z"/></svg></div>
     <div class="jbody">
-      <div class="spec"><div><b>18G</b><span>gauge</span></div><div><b>medioplantar</b><span>approach</span></div><div><b>US</b><span>guided</span></div></div>
+      <div class="spec"><div><b>18G</b><span>gauge</span></div><div><b>medioplantar</b><span>approach</span></div><div><b>2</b><span>portals</span></div></div>
       <div class="field"><h4><svg class="ic" viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20z"/></svg>Palpate</h4>
         <ul><li>Elongated distension <span class="anat">medioplantar to the calcaneus</span>, running proximodistally</li><li>The equine equivalent is thoroughpin</li><li>Not to be confused with calcaneal bursal distension or tarsocrural recesses</li></ul></div>
-      <div class="field lead"><h4><svg class="ic" viewBox="0 0 24 24"><path d="M20.7 5.3 18.7 3.3a1 1 0 0 0-1.4 0l-2.3 2.3 3.4 3.4 2.3-2.3a1 1 0 0 0 0-1.4zM3 17.2V21h3.8L17.4 10.4 13.6 6.6 3 17.2z"/></svg>Needle in</h4>
-        <ul><li>Into the widest part of the lumen, <b>under ultrasound</b></li><li>Stay off the <span class="anat">medial saphenous vessels</span></li></ul></div>
-      <div class="field"><h4><svg class="ic" viewBox="0 0 24 24"><path d="M12 2 4 7v10l8 5 8-5V7l-8-5z"/></svg>Second needle</h4>
-        <ul><li>Second portal at the opposite end of the lumen</li></ul></div>
+      <div class="field lead"><h4><svg class="ic" viewBox="0 0 24 24"><path d="M20.7 5.3 18.7 3.3a1 1 0 0 0-1.4 0l-2.3 2.3 3.4 3.4 2.3-2.3a1 1 0 0 0 0-1.4zM3 17.2V21h3.8L17.4 10.4 13.6 6.6 3 17.2z"/></svg>Portals <span class="cnt">2 portals</span></h4>
+        <ol class="portals"><li class="p"><span class="pn">1</span><div>Into the widest part of the lumen, <b>under ultrasound</b>, staying off the <span class="anat">medial saphenous vessels</span></div></li><li class="p"><span class="pn">2</span><div>Second portal at the opposite end of the lumen</div></li></ol></div>
       <div class="field"><h4><svg class="ic" viewBox="0 0 24 24"><path d="M12 2s6 6.5 6 11a6 6 0 0 1-12 0c0-4.5 6-11 6-11z"/></svg>Lavage</h4>
         <ul><li><span class="num">1–2 L</span> ± povidone-iodine <span class="num">0.1%</span></li></ul></div>
       <div class="cardsplit"></div>
@@ -744,13 +736,11 @@ footer .line{width:30px;height:3px;background:var(--accent);border-radius:2px;ma
       <div class="t"><b>Calcanean bursae</b><span>Subtendinous · subcutaneous</span></div>
       <svg class="chev" viewBox="0 0 24 24"><path d="M7.4 8.6 12 13.2l4.6-4.6L18 10l-6 6-6-6z"/></svg></div>
     <div class="jbody">
-      <div class="spec"><div><b>8–10 mm</b><span>below skin</span></div><div><b>3 portals</b><span>drainage</span></div><div><b>2–3 L</b><span>lavage</span></div></div>
+      <div class="spec"><div><b>8–10 mm</b><span>below skin</span></div><div><b>3 portals</b><span>drainage</span></div><div><b>3</b><span>portals</span></div></div>
       <div class="field"><h4><svg class="ic" viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20z"/></svg>Palpate</h4>
         <ul><li>Swelling over the <span class="anat">tuber calcanei</span>, usually with a wound over it</li><li>In cattle this is a <b>pressure-sore disease</b>. Hock lesions first, wounds second</li><li>The lumen runs <span class="num">9 cm</span> proximal and <span class="num">7 cm</span> distal to the tuber</li></ul></div>
-      <div class="field lead"><h4><svg class="ic" viewBox="0 0 24 24"><path d="M20.7 5.3 18.7 3.3a1 1 0 0 0-1.4 0l-2.3 2.3 3.4 3.4 2.3-2.3a1 1 0 0 0 0-1.4zM3 17.2V21h3.8L17.4 10.4 13.6 6.6 3 17.2z"/></svg>Needle in</h4>
-        <ul><li>Through the wound tract after debridement, or into the effusion on a 7.5 MHz probe</li><li>Sedate with xylazine <span class="num">0.05 mg/kg</span></li><li>Tourniquet <span class="num">15 cm</span> above the tuber, procaine into the <span class="anat">lateral plantar metatarsal vein</span></li></ul></div>
-      <div class="field"><h4><svg class="ic" viewBox="0 0 24 24"><path d="M12 2 4 7v10l8 5 8-5V7l-8-5z"/></svg>Second needle</h4>
-        <ul><li><b>Three drainage portals</b>, <span class="num">15 mm</span> each</li><li class="sub">— proximolateral</li><li class="sub">— proximomedial</li><li class="sub">— laterodistal</li><li>Curette exudate out through each one</li></ul></div>
+      <div class="field lead"><h4><svg class="ic" viewBox="0 0 24 24"><path d="M20.7 5.3 18.7 3.3a1 1 0 0 0-1.4 0l-2.3 2.3 3.4 3.4 2.3-2.3a1 1 0 0 0 0-1.4zM3 17.2V21h3.8L17.4 10.4 13.6 6.6 3 17.2z"/></svg>Portals <span class="cnt">3 portals</span></h4>
+        <ol class="portals"><li class="p"><span class="pn">1</span><div><b>Proximolateral</b></div></li><li class="p"><span class="pn">2</span><div><b>Proximomedial</b></div></li><li class="p"><span class="pn">3</span><div><b>Laterodistal</b></div></li><li class="pnote"><div>All three at <span class="num">15 mm</span>, curetting exudate out through each. Entry through the wound tract after debridement, or into the effusion on a 7.5 MHz probe</div></li></ol></div>
       <div class="field"><h4><svg class="ic" viewBox="0 0 24 24"><path d="M12 2s6 6.5 6 11a6 6 0 0 1-12 0c0-4.5 6-11 6-11z"/></svg>Lavage</h4>
         <ul><li><span class="num">2–3 L</span> saline with povidone-iodine <span class="num">0.1%</span></li><li>Drain and foam, plus <span class="num">5 ml</span> ampicillin</li><li>Relavage two to three times a week, for about three weeks</li></ul></div>
       <div class="cardsplit"></div>
