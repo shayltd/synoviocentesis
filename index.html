@@ -96,21 +96,38 @@ nav.tabs button{
 }
 nav.tabs button.on{color:var(--deep);font-weight:800;border-bottom-color:var(--accent)}
 
-nav.tabs2{
-  position:sticky;top:51px;z-index:40;display:flex;align-items:center;gap:2px;
-  background:#f1ede6;border-bottom:1px solid var(--line);padding:0 10px;
+/* the quiet way into the reference material */
+nav.tabs .refbtn{
+  flex:none;border:none;background:none;font-family:inherit;cursor:pointer;
+  font-size:.72rem;font-weight:500;color:var(--soft);letter-spacing:.2px;
+  padding:15px 13px 12px 14px;margin-left:2px;display:flex;align-items:center;gap:4px;
+  position:relative;
 }
-nav.tabs2 .t2lab{
-  font-size:.6rem;font-weight:700;letter-spacing:1.1px;text-transform:uppercase;
-  color:var(--soft);padding-right:8px;opacity:.8;
+nav.tabs .refbtn::before{
+  content:"";position:absolute;left:0;top:14px;bottom:14px;width:1px;background:var(--line);
 }
-nav.tabs2 button{
-  border:none;background:none;font-family:inherit;
-  font-size:.74rem;font-weight:500;color:var(--muted);
-  padding:8px 11px;cursor:pointer;white-space:nowrap;
-  border-bottom:2px solid transparent;
+nav.tabs .refbtn svg{width:12px;height:12px;fill:currentColor;opacity:.8}
+nav.tabs .refbtn:active{color:var(--deep)}
+
+#refsheet{position:fixed;inset:0;z-index:290;background:var(--bg);display:none;flex-direction:column}
+#refsheet.on{display:flex}
+#refsheet .rs-top{flex:none;background:var(--card);border-bottom:1px solid var(--line);
+  padding:13px 14px 0}
+#refsheet .rs-head{display:flex;align-items:flex-start;gap:10px;margin-bottom:11px}
+#refsheet .rs-head h3{margin:0;font-size:.95rem;letter-spacing:.2px;color:var(--deep);flex:1}
+#refsheet .rs-head p{margin:2px 0 0;font-size:.74rem;color:var(--muted);font-weight:400;
+  letter-spacing:0;line-height:1.4}
+#refsheet .rs-x{flex:none;background:var(--deep);color:#fff;border:none;border-radius:8px;
+  font-family:inherit;font-size:.78rem;font-weight:600;padding:7px 13px}
+#refsheet nav.rtabs{display:flex;gap:2px}
+#refsheet nav.rtabs button{
+  flex:1;border:none;background:none;font-family:inherit;font-size:.82rem;font-weight:600;
+  color:var(--muted);padding:9px 6px 11px;cursor:pointer;
+  border-bottom:3px solid transparent;transition:.16s;
 }
-nav.tabs2 button.on{color:var(--deep);font-weight:700;border-bottom-color:var(--soft)}
+#refsheet nav.rtabs button.on{color:var(--deep);font-weight:800;border-bottom-color:var(--accent)}
+#refsheet .rs-body{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;
+  padding:14px 13px 44px;max-width:740px;width:100%;margin:0 auto}
 main{padding:14px 13px 0;max-width:740px;margin:0 auto}
 .view{display:none}
 .view.on{display:block;animation:fade .18s ease}
@@ -396,12 +413,8 @@ footer .line{width:30px;height:3px;background:var(--accent);border-radius:2px;ma
   <button class="on" data-v="fore">Forelimb</button>
   <button data-v="digit">Digit</button>
   <button data-v="hind">Hindlimb</button>
-</nav>
-<nav class="tabs2">
-  <span class="t2lab">Reference</span>
-  <button data-v="fluid">Fluid</button>
-  <button data-v="prep">Prep</button>
-  <button data-v="decide">Decide</button>
+  <button class="refbtn" id="refbtn" type="button" aria-label="Reference">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 2h11a3 3 0 0 1 3 3v16a1 1 0 0 1-1 1H7a3 3 0 0 1-3-3V5a3 3 0 0 1 2-2.83zM7 4a1 1 0 0 0-1 1v11.17c.31-.11.65-.17 1-.17h11V5a1 1 0 0 0-1-1zm0 14a1 1 0 0 0 0 2h11v-2z"/></svg>Reference</button>
 </nav>
 
 <main>
@@ -787,7 +800,49 @@ footer .line{width:30px;height:3px;background:var(--accent);border-radius:2px;ma
   <p class="nores" style="display:none;text-align:center;color:var(--muted);font-size:.88rem;padding:22px 0">Nothing matches</p>
 </section>
 
-<section class="view" id="fluid">
+
+
+
+
+
+
+</main>
+
+<div id="lb" aria-hidden="true">
+  <div class="lbbar">
+    <span class="lbcap" id="lbcap"></span>
+    <button id="lbzoom">Zoom in</button>
+    <button id="lbclose">Close</button>
+  </div>
+  <div class="lbinner"><img id="lbimg" alt=""></div>
+</div>
+
+<footer>
+  <div class="line"></div>
+  <b>Synoviocentesis &amp; Lavage in Cattle</b><br>
+  Draft for review. Schematics are orientation aids, not anatomical plates.<br>
+  Photographic figures load from <code>img/</code> and are not distributed with this file.<br>
+  Verify against Nuss et al., <i>Arthrocentesis in cattle</i> Pt 1 &amp; 2, and<br>
+  Desrochers &amp; Francoz, <i>Vet Clin North Am Food Anim Pract</i> 2014, before clinical use.
+</footer>
+
+<div id="refsheet">
+  <div class="rs-top">
+    <div class="rs-head">
+      <div>
+        <h3>Reference</h3>
+        <p>Read before you start &mdash; not during the tap.</p>
+      </div>
+      <button class="rs-x" id="refx" type="button">Done</button>
+    </div>
+    <nav class="rtabs">
+      <button class="on" data-r="fluid">Fluid</button>
+      <button data-r="prep">Prep</button>
+      <button data-r="decide">Decide</button>
+    </nav>
+  </div>
+  <div class="rs-body" id="refbody">
+<section class="view on" id="fluid">
 
   <div class="block">
     <h3><svg class="ic" viewBox="0 0 24 24"><path d="M12 2s6 6.5 6 11a6 6 0 0 1-12 0c0-4.5 6-11 6-11z"/></svg>Volumes</h3>
@@ -869,7 +924,6 @@ footer .line{width:30px;height:3px;background:var(--accent);border-radius:2px;ma
   </div>
 
 </section>
-
 <section class="view" id="prep">
 
   <div class="block">
@@ -926,7 +980,6 @@ footer .line{width:30px;height:3px;background:var(--accent);border-radius:2px;ma
   </div>
 
 </section>
-
 <section class="view" id="decide">
 
   <div class="block">
@@ -966,26 +1019,8 @@ footer .line{width:30px;height:3px;background:var(--accent);border-radius:2px;ma
   </div>
 
 </section>
-
-</main>
-
-<div id="lb" aria-hidden="true">
-  <div class="lbbar">
-    <span class="lbcap" id="lbcap"></span>
-    <button id="lbzoom">Zoom in</button>
-    <button id="lbclose">Close</button>
   </div>
-  <div class="lbinner"><img id="lbimg" alt=""></div>
 </div>
-
-<footer>
-  <div class="line"></div>
-  <b>Synoviocentesis &amp; Lavage in Cattle</b><br>
-  Draft for review. Schematics are orientation aids, not anatomical plates.<br>
-  Photographic figures load from <code>img/</code> and are not distributed with this file.<br>
-  Verify against Nuss et al., <i>Arthrocentesis in cattle</i> Pt 1 &amp; 2, and<br>
-  Desrochers &amp; Francoz, <i>Vet Clin North Am Food Anim Pract</i> 2014, before clinical use.
-</footer>
 
 <div id="figcheck">
   <div class="ch-top">
@@ -1001,16 +1036,44 @@ footer .line{width:30px;height:3px;background:var(--accent);border-radius:2px;ma
 
 <script>
 (function(){
-  var tabs=document.querySelectorAll('nav.tabs button, nav.tabs2 button'), views=document.querySelectorAll('.view');
+  var tabs=document.querySelectorAll('nav.tabs button[data-v]'),
+      views=document.querySelectorAll('main .view');
   tabs.forEach(function(b){
     b.addEventListener('click',function(){
       tabs.forEach(function(x){x.classList.remove('on')});
       views.forEach(function(v){v.classList.remove('on')});
       b.classList.add('on');
       document.getElementById(b.dataset.v).classList.add('on');
-      b.scrollIntoView({block:'nearest',inline:'center',behavior:'smooth'});
       window.scrollTo({top:0,behavior:'smooth'});
     });
+  });
+
+  /* reference sheet - off the main surface until asked for */
+  var rsheet=document.getElementById('refsheet'),
+      rbody=document.getElementById('refbody'),
+      rtabs=document.querySelectorAll('#refsheet nav.rtabs button'),
+      rviews=document.querySelectorAll('#refbody .view');
+  rtabs.forEach(function(b){
+    b.addEventListener('click',function(){
+      rtabs.forEach(function(x){x.classList.remove('on')});
+      rviews.forEach(function(v){v.classList.remove('on')});
+      b.classList.add('on');
+      document.getElementById(b.dataset.r).classList.add('on');
+      rbody.scrollTop=0;
+    });
+  });
+  function openRef(){
+    var any=false;
+    rviews.forEach(function(v){ if(v.classList.contains('on')) any=true; });
+    if(!any){ rviews[0].classList.add('on');
+      rtabs.forEach(function(x,i){ x.classList.toggle('on', i===0); }); }
+    rsheet.classList.add('on'); document.body.style.overflow='hidden';
+  }
+  function closeRef(){ rsheet.classList.remove('on'); document.body.style.overflow=''; }
+  document.getElementById('refbtn').addEventListener('click',openRef);
+  document.getElementById('refx').addEventListener('click',closeRef);
+  document.addEventListener('keydown',function(e){
+    if(e.key==='Escape'&&rsheet.classList.contains('on')) closeRef();
   });
 
   document.addEventListener('click',function(e){
