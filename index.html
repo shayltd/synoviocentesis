@@ -54,6 +54,36 @@ header .sub{margin:4px 0 0;font-size:.82rem;font-weight:300;opacity:.88;position
 #figok button{flex:none;background:none;border:none;color:#2f5438;font-family:inherit;
   font-size:.72rem;font-weight:600;text-decoration:underline;cursor:pointer;padding:0}
 .figwrap.ready{display:block}
+/* figure check sheet */
+#figcheck{position:fixed;inset:0;z-index:300;background:var(--bg);display:none;
+  flex-direction:column}
+#figcheck.on{display:flex}
+#figcheck .ch-top{flex:none;background:var(--card);border-bottom:1px solid var(--line);
+  padding:13px 14px;display:flex;align-items:center;gap:10px}
+#figcheck .ch-top h3{margin:0;font-size:.95rem;letter-spacing:.2px;color:var(--deep);flex:1}
+#figcheck .ch-top p{margin:2px 0 0;font-size:.74rem;color:var(--muted);font-weight:400;
+  letter-spacing:0;line-height:1.4}
+#figcheck .ch-x{flex:none;background:var(--deep);color:#fff;border:none;border-radius:8px;
+  font-family:inherit;font-size:.78rem;font-weight:600;padding:7px 13px}
+#figcheck .ch-body{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:10px 12px 40px}
+.chrow{display:flex;gap:11px;background:var(--card);border:1px solid var(--line);
+  border-radius:12px;padding:9px;margin-bottom:8px;align-items:flex-start}
+.chrow .th{flex:none;width:74px;height:74px;border-radius:8px;overflow:hidden;
+  background:#f1ece2;display:flex;align-items:center;justify-content:center}
+.chrow .th img{width:100%;height:100%;object-fit:cover;display:block}
+.chrow.miss .th{border:1px dashed #d9cfbd;background:#faf7f1;font-size:.6rem;
+  color:var(--muted);letter-spacing:.5px}
+.chrow .meta{flex:1;min-width:0}
+.chrow .meta b{display:block;font-size:.88rem;color:var(--text);line-height:1.3}
+.chrow .meta .exp{margin:3px 0 0;font-size:.76rem;color:var(--muted);line-height:1.45}
+.chrow .meta .via{display:inline-block;margin-top:5px;font-size:.62rem;font-weight:700;
+  letter-spacing:.4px;text-transform:uppercase;padding:2px 6px;border-radius:20px;
+  background:var(--amber-bg);color:var(--amber);border:1px solid var(--amber-line)}
+.chrow .meta .via.ok{background:var(--accent-bg);color:#2f5438;border-color:var(--accent-line)}
+.chrow .sw{flex:none;background:none;border:1px solid var(--line);border-radius:8px;
+  font-family:inherit;font-size:.72rem;font-weight:600;color:var(--deep);padding:6px 10px;
+  margin-top:1px}
+#figok #figcheckbtn{color:var(--deep);margin-right:2px}
 nav.tabs{
   position:sticky;top:0;z-index:41;display:flex;
   background:var(--card);border-bottom:1px solid var(--line);
@@ -358,7 +388,8 @@ footer .line{width:30px;height:3px;background:var(--accent);border-radius:2px;ma
 </div>
 <div id="figok">
   <span class="fo-t" id="figokt"></span>
-  <button id="figclear">replace</button>
+  <button id="figcheckbtn">check</button>
+  <button id="figclear">replace all</button>
 </div>
 
 <nav class="tabs">
@@ -956,6 +987,18 @@ footer .line{width:30px;height:3px;background:var(--accent);border-radius:2px;ma
   Desrochers &amp; Francoz, <i>Vet Clin North Am Food Anim Pract</i> 2014, before clinical use.
 </footer>
 
+<div id="figcheck">
+  <div class="ch-top">
+    <div>
+      <h3>Check the figures</h3>
+      <p>One row per slot. If a picture does not match its line, tap <b>swap</b> and pick the right file &mdash; only that slot changes.</p>
+    </div>
+    <button class="ch-x" id="figcheckx">Done</button>
+  </div>
+  <div class="ch-body" id="figcheckb"></div>
+  <input type="file" id="figin1" accept="image/*" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0">
+</div>
+
 <script>
 (function(){
   var tabs=document.querySelectorAll('nav.tabs button, nav.tabs2 button'), views=document.querySelectorAll('.view');
@@ -1047,12 +1090,25 @@ footer .line{width:30px;height:3px;background:var(--accent);border-radius:2px;ma
   }
   function norm(n){return n.replace(/\.[^.]+$/,'').toLowerCase().replace(/[^a-z0-9]/g,'');}
 
+  /* a slot with no file of its own borrows one that shows the same thing */
+  var ALIAS={'calcanean-bursa.png':'hock-synovial-lateral.png'};
+
+  function lookup(store,want){
+    if(store[want]) return {d:store[want],via:'own'};
+    for(var k in store){ if(norm(k)===norm(want)) return {d:store[k],via:'own'}; }
+    var a=ALIAS[want];
+    if(a){
+      if(store[a]) return {d:store[a],via:a};
+      for(var k2 in store){ if(norm(k2)===norm(a)) return {d:store[k2],via:a}; }
+    }
+    return {d:null,via:null};
+  }
+
   function apply(store){
     var n=0;
     slots().forEach(function(img){
-      var want=img.getAttribute('data-fig'), d=store[want];
-      if(!d){ for(var k in store){ if(norm(k)===norm(want)){ d=store[k]; break; } } }
-      if(d){ img.src=d; n++; var sl=img.closest('.figslot'); if(sl){ sl.classList.add('ready'); var fw=sl.closest('.figwrap'); if(fw) fw.classList.add('ready'); } }
+      var want=img.getAttribute('data-fig'), r=lookup(store,want);
+      if(r.d){ img.src=r.d; n++; var sl=img.closest('.figslot'); if(sl){ sl.classList.add('ready'); var fw=sl.closest('.figwrap'); if(fw) fw.classList.add('ready'); } }
     });
     return n;
   }
@@ -1150,6 +1206,76 @@ footer .line{width:30px;height:3px;background:var(--accent);border-radius:2px;ma
     });
   });
 
+  /* --- check sheet: see all slots at once, swap any single one --- */
+  var EXPECT={
+   'shoulder-synovial.png':'Shoulder joint, three views \u2014 the synovial cavity shaded, bicipital bursa alongside it.',
+   'elbow-injection.png':'Elbow with the needle in place, lateral view.',
+   'olecranon-bursa.png':'Elbow from the side \u2014 olecranon and triceps bursae marked over the point of the elbow.',
+   'carpus-injection.png':'Carpus with the needle in place, flexed.',
+   'carpus-synovial.png':'Carpus lateral and medial \u2014 the three joint levels and the flexor sheaths shaded.',
+   'precarpal-bursa.png':'Carpus from the side \u2014 the precarpal bursa sitting on the front of the carpus.',
+   'fetlock-injection.png':'Fetlock with the needle in place.',
+   'digital-joints.png':'Digit from the side \u2014 pastern and coffin joints with the annular ligaments lettered A\u2013G.',
+   'hoof-sagittal.png':'Sagittal section through the claw \u2014 navicular bursa, coffin joint, DDFT insertion.',
+   'dfts-contrast.png':'Contrast radiograph of the digital flexor tendon sheath (not a drawing).',
+   'hip-synovial.png':'Hip joint, three views \u2014 the cavity shaded, trochanter major as the landmark.',
+   'stifle-injection.png':'Stifle with the needle in place.',
+   'hock-injection.png':'Hock with the needle in place \u2014 dorsomedial.',
+   'hock-synovial-medial.png':'Hock from the MEDIAL side \u2014 the joint levels shaded.',
+   'hock-synovial-lateral.png':'Hock from the LATERAL side \u2014 tarsal sheath and the joint levels.',
+   'calcanean-bursa.png':'Hock from the side with the calcanean bursae marked around the Achilles tendon.'
+  };
+  var sheet=document.getElementById('figcheck'),
+      sheetB=document.getElementById('figcheckb'),
+      sheetX=document.getElementById('figcheckx'),
+      chkBtn=document.getElementById('figcheckbtn'),
+      inp1=document.getElementById('figin1'),
+      pending=null, cache={};
+
+  function renderCheck(store){
+    cache=store||{};
+    var html='';
+    slots().forEach(function(img){
+      var want=img.getAttribute('data-fig'),
+          name=(img.getAttribute('alt')||want),
+          r=lookup(cache,want),
+          exp=EXPECT[want]||'';
+      html+='<div class="chrow'+(r.d?'':' miss')+'">'
+        +'<div class="th">'+(r.d?'<img src="'+r.d+'" alt="">':'none')+'</div>'
+        +'<div class="meta"><b>'+name+'</b><p class="exp">'+exp+'</p>'
+        +(r.via==='own'?'<span class="via ok">'+want+'</span>'
+          :r.via?'<span class="via">borrowed from '+r.via+'</span>'
+          :'<span class="via">no file for '+want+'</span>')
+        +'</div><button class="sw" data-slot="'+want+'">swap</button></div>';
+    });
+    sheetB.innerHTML=html;
+  }
+  function openCheck(){
+    get().then(function(s){ renderCheck(s||{}); sheet.classList.add('on');
+      document.body.style.overflow='hidden'; });
+  }
+  function closeCheck(){ sheet.classList.remove('on'); document.body.style.overflow=''; }
+  if(chkBtn) chkBtn.addEventListener('click',openCheck);
+  if(sheetX) sheetX.addEventListener('click',closeCheck);
+  sheetB.addEventListener('click',function(e){
+    var b=e.target.closest('.sw'); if(!b) return;
+    if(sandboxed){ alert('File pickers do not work inside a preview. Open the hosted page instead.'); return; }
+    pending=b.getAttribute('data-slot'); inp1.value=''; inp1.click();
+  });
+  inp1.addEventListener('change',function(ev){
+    var f=ev.target.files&&ev.target.files[0];
+    if(!f||!pending) return;
+    var slot=pending; pending=null;
+    toData(slot,f).then(function(pair){
+      if(!pair) return;
+      cache[slot]=pair[1];
+      put(cache).then(function(){
+        var total=slots().length, n=apply(cache);
+        show(n,total); renderCheck(cache);
+      });
+    });
+  });
+
   /* on load: use what's stored, otherwise ask once */
   var total=slots().length;
   get().then(function(store){
@@ -1161,5 +1287,6 @@ footer .line{width:30px;height:3px;background:var(--accent);border-radius:2px;ma
 })();
 
 </script>
+
 </body>
 </html>
