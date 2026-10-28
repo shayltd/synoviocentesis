@@ -1,0 +1,1064 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Synoviocentesis &amp; Lavage</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#2b3340; --deep:#33505f; --deep2:#4a6b7a; --soft:#7b8a94;
+  --accent:#4a7c59; --accent-bg:#edf4ee; --accent-line:#cfe2d4;
+  --bg:#f6f4f0; --card:#fffefb; --line:#e9e3d9; --line2:#f2ede4;
+  --text:#2f3640; --muted:#79807f;
+  --amber:#9c6b2f; --amber-bg:#fbf4e8; --amber-line:#ecdcc0;
+  --red:#9e4440; --red-bg:#fbeeed;
+  --r:16px;
+  --sh:0 1px 2px rgba(43,51,64,.05), 0 6px 18px rgba(43,51,64,.055);
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;padding:0}
+body{
+  font-family:'Inter',system-ui,-apple-system,'Segoe UI',Arial,sans-serif;
+  background:var(--bg); color:var(--text);
+  font-size:16px; line-height:1.6; padding-bottom:48px;
+  -webkit-font-smoothing:antialiased;
+}
+
+/* ============ HEADER ============ */
+header{
+  position:relative;
+  background:linear-gradient(135deg,var(--deep) 0%,var(--deep2) 62%,var(--soft) 100%);
+  color:#fff; padding:20px 18px 16px; overflow:hidden;
+}
+header .mark{position:absolute;right:-30px;top:-30px;width:140px;height:140px;opacity:.09}
+header h1{margin:0;font-size:1.26rem;font-weight:800;letter-spacing:-.4px;position:relative}
+header .sub{margin:4px 0 0;font-size:.82rem;font-weight:300;opacity:.88;position:relative}
+
+/* ============ TABS ============ */
+#figbar{background:#fdf6e9;border-bottom:1px solid #f0dcb4;padding:10px 14px;
+  display:none;align-items:center;gap:10px;font-size:.78rem;color:#9c6b2f}
+#figbar.on{display:flex}
+#figbar .fb-t{flex:1;min-width:0;line-height:1.45}
+#figbar button{flex:none;background:var(--deep);color:#fff;border:none;border-radius:8px;
+  padding:8px 14px;font-family:inherit;font-size:.76rem;font-weight:600;cursor:pointer;
+  white-space:nowrap}
+#figbar input,#figin{position:absolute!important;width:1px;height:1px;opacity:0;
+  overflow:hidden;clip:rect(0 0 0 0);pointer-events:none}
+#figok{background:var(--accent-bg);border-bottom:1px solid var(--accent-line);
+  padding:8px 14px;display:none;align-items:center;gap:9px;font-size:.74rem;color:#2f5438}
+#figok.on{display:flex}
+#figok .fo-t{flex:1;min-width:0}
+#figok button{flex:none;background:none;border:none;color:#2f5438;font-family:inherit;
+  font-size:.72rem;font-weight:600;text-decoration:underline;cursor:pointer;padding:0}
+.figwrap.ready{display:block}
+nav.tabs{
+  position:sticky;top:0;z-index:41;display:flex;
+  background:var(--card);border-bottom:1px solid var(--line);
+}
+nav.tabs button{
+  flex:1;border:none;background:none;font-family:inherit;
+  font-size:.92rem;font-weight:600;color:var(--muted);
+  padding:15px 6px 12px;cursor:pointer;white-space:nowrap;
+  border-bottom:3px solid transparent;transition:.16s;
+}
+nav.tabs button.on{color:var(--deep);font-weight:800;border-bottom-color:var(--accent)}
+
+nav.tabs2{
+  position:sticky;top:51px;z-index:40;display:flex;align-items:center;gap:2px;
+  background:#f1ede6;border-bottom:1px solid var(--line);padding:0 10px;
+}
+nav.tabs2 .t2lab{
+  font-size:.6rem;font-weight:700;letter-spacing:1.1px;text-transform:uppercase;
+  color:var(--soft);padding-right:8px;opacity:.8;
+}
+nav.tabs2 button{
+  border:none;background:none;font-family:inherit;
+  font-size:.74rem;font-weight:500;color:var(--muted);
+  padding:8px 11px;cursor:pointer;white-space:nowrap;
+  border-bottom:2px solid transparent;
+}
+nav.tabs2 button.on{color:var(--deep);font-weight:700;border-bottom-color:var(--soft)}
+main{padding:14px 13px 0;max-width:740px;margin:0 auto}
+.view{display:none}
+.view.on{display:block;animation:fade .18s ease}
+@keyframes fade{from{opacity:0;transform:translateY(3px)}to{opacity:1;transform:none}}
+
+/* ============ SEARCH ============ */
+.search-wrap{position:relative;margin-bottom:11px}
+.search-wrap input,.search-wrap .q{
+  width:100%;font-family:inherit;font-size:.92rem;
+  padding:11px 14px 11px 38px;
+  border:1px solid var(--line);border-radius:11px;
+  background:var(--card);color:var(--text);outline:none;
+}
+.search-wrap input:focus,.search-wrap .q:focus{border-color:var(--soft);box-shadow:0 0 0 3px rgba(111,110,144,.11)}
+.search-wrap .si{
+  position:absolute;left:12px;top:50%;transform:translateY(-50%);
+  width:16px;height:16px;fill:var(--muted);pointer-events:none;
+}
+
+/* ============ KEY / LEGEND ============ */
+.key{
+  background:var(--card);border:1px solid var(--line);border-radius:11px;
+  padding:9px 12px;margin-bottom:14px;font-size:.72rem;color:var(--muted);
+  display:flex;flex-wrap:wrap;gap:7px 15px;align-items:center;
+}
+.key i{display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:5px;vertical-align:-1px}
+.k-bone{background:#d8d8e2}
+.k-pouch{background:rgba(47,138,59,.3);border:1px dashed var(--accent)}
+.k-needle{background:var(--deep)}
+.key .anat{font-size:.72rem}
+
+/* ============ GROUP HEADING ============ */
+.seclead{margin:2px 0 13px;padding:0 2px}
+.seclead b{display:block;font-size:.74rem;font-weight:700;letter-spacing:1.3px;
+  text-transform:uppercase;color:var(--deep)}
+.seclead span{display:block;font-size:.73rem;color:var(--muted);margin-top:2px}
+
+.group:first-of-type{margin-top:2px}
+
+/* ============ CARD ============ */
+.jcard{
+  background:var(--card);border:1px solid var(--line);border-radius:var(--r);
+  margin-bottom:9px;box-shadow:var(--sh);overflow:hidden;
+}
+.jhead{display:flex;align-items:center;gap:11px;padding:13px 14px;cursor:pointer;user-select:none}
+.jhead .num{
+  flex:none;width:28px;height:28px;border-radius:8px;
+  background:var(--deep);color:#fff;font-size:.74rem;font-weight:700;
+  display:flex;align-items:center;justify-content:center;
+}
+.jhead .t{flex:1;min-width:0}
+.jhead .t b{display:block;font-size:.98rem;font-weight:700;color:var(--deep);line-height:1.3}
+.jhead .t span{display:block;font-size:.72rem;color:var(--muted);font-weight:300;font-style:italic;margin-top:1px}
+.chev{flex:none;width:15px;height:15px;fill:var(--soft);transition:transform .2s}
+.jcard.open .chev{transform:rotate(180deg)}
+.jbody{display:none;padding:0 14px 14px;border-top:1px solid var(--line2)}
+.jcard.open .jbody{display:block}
+
+/* ============ FIGURES ============ */
+.figslot{margin:13px 0 0}
+.figslot img{
+  width:100%;height:auto;display:block;
+  border-radius:9px;border:1px solid var(--line);background:#fff;
+}
+.figwrap{display:none;margin-top:14px;border:1px solid var(--line);border-radius:11px;
+  background:#fbf9f5;overflow:hidden}
+.figwrap summary{
+  list-style:none;cursor:pointer;padding:10px 13px;
+  font-size:.74rem;font-weight:700;letter-spacing:.5px;text-transform:uppercase;
+  color:var(--soft);display:flex;align-items:center;gap:7px;
+}
+.figwrap summary::-webkit-details-marker{display:none}
+.figwrap summary::before{
+  content:"";width:0;height:0;border-left:5px solid var(--soft);
+  border-top:4px solid transparent;border-bottom:4px solid transparent;
+  transition:transform .18s;
+}
+.figwrap[open] summary::before{transform:rotate(90deg)}
+.figwrap[open] summary{border-bottom:1px solid var(--line2)}
+.figwrap .figslot{padding:11px 11px 0}
+.figwrap .figcap{padding:0 11px 11px}
+.figcap{font-size:.67rem;color:var(--muted);text-align:center;margin:5px 0 0;font-style:italic;line-height:1.45}
+.figslot{position:relative}
+.figslot img{cursor:zoom-in}
+.figslot .zoomhint{
+  position:absolute;top:7px;right:7px;
+  background:rgba(50,50,102,.76);color:#fff;
+  border-radius:6px;padding:3px 6px;
+  font-size:.6rem;font-weight:600;letter-spacing:.3px;
+  pointer-events:none;display:flex;align-items:center;gap:3px;
+}
+.figslot .zoomhint svg{width:10px;height:10px;fill:#fff}
+#lb{
+  position:fixed;inset:0;z-index:200;display:none;
+  background:rgba(20,20,34,.94);
+  overflow:auto;-webkit-overflow-scrolling:touch;
+  padding:0;
+}
+#lb.on{display:block}
+#lb .lbinner{min-height:100%;display:flex;align-items:center;justify-content:center;padding:52px 8px 20px}
+#lb img{max-width:none;width:100%;height:auto;border-radius:6px;background:#fff}
+#lb.fit img{width:100%}
+#lb.wide img{width:220%}
+#lb .lbbar{
+  position:fixed;top:0;left:0;right:0;height:44px;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 12px;background:rgba(20,20,34,.9);
+  font-size:.72rem;color:#d8d8e6;gap:10px;
+}
+#lb .lbbar button{
+  font-family:inherit;font-size:.72rem;font-weight:600;
+  background:rgba(255,255,255,.14);color:#fff;border:none;
+  border-radius:7px;padding:6px 11px;cursor:pointer;
+}
+#lb .lbcap{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-style:italic}
+
+/* ============ FIELDS ============ */
+.field{padding-top:13px}
+.field h4{
+  margin:0 0 5px;font-size:.67rem;font-weight:700;letter-spacing:.7px;
+  color:var(--accent);text-transform:uppercase;
+  display:flex;align-items:center;gap:6px;
+}
+.field+.field{margin-top:2px}
+.field p{margin:0 0 4px}
+.field p:last-child{margin-bottom:0}
+.ic{width:13px;height:13px;flex:none;fill:currentColor;opacity:.85}
+.field p{margin:0;font-size:.89rem}
+.field p+p{margin-top:6px}
+
+/* ---- anatomical landmark highlight ---- */
+.anat{
+  background:var(--accent-bg);
+  border-bottom:1.5px solid var(--accent-line);
+  color:#2f5438;font-weight:600;
+  padding:0 3px;border-radius:3px;
+  box-decoration-break:clone;-webkit-box-decoration-break:clone;
+}
+/* ---- measurement / dose chip ---- */
+.num{
+  font-weight:700;color:var(--deep);
+  background:#eef1ee;border-radius:4px;padding:0 4px;
+  font-variant-numeric:tabular-nums;white-space:nowrap;
+}
+
+/* ============ PITFALL ============ */
+.pit{
+  background:var(--amber-bg);border:1px solid var(--amber-line);
+  border-left:3px solid var(--amber);
+  border-radius:0 9px 9px 0;padding:9px 11px;margin-top:13px;
+}
+.pit h4{color:var(--amber);margin-bottom:3px}
+.pit p{font-size:.86rem}
+.pit p+p{margin-top:5px}
+
+/* ============ SOURCE LINE ============ */
+.src{
+  margin-top:12px;padding-top:8px;border-top:1px dashed var(--line);
+  font-size:.68rem;color:var(--muted);font-weight:300;line-height:1.5;
+}
+
+/* ============ BLOCKS ============ */
+.block{
+  background:var(--card);border:1px solid var(--line);border-radius:var(--r);
+  padding:14px 15px;margin-bottom:11px;box-shadow:var(--sh);
+}
+.block h3{
+  margin:0 0 9px;font-size:.97rem;font-weight:700;color:var(--deep);
+  display:flex;align-items:center;gap:8px;
+}
+.block h3 .ic{width:16px;height:16px}
+.block h5{
+  margin:13px 0 4px;font-size:.73rem;font-weight:700;color:var(--accent);
+  letter-spacing:.4px;text-transform:uppercase;
+}
+.block h5:first-of-type{margin-top:0}
+.block p{margin:0 0 6px;font-size:.89rem}
+.block p:last-child{margin-bottom:0}
+.block ul{margin:0;padding-left:17px;font-size:.89rem}
+.block li{margin-bottom:5px}
+.block li:last-child{margin-bottom:0}
+
+/* ============ STEPS ============ */
+.step{display:flex;gap:10px;padding:11px 0;border-bottom:1px solid var(--line2)}
+.step:last-child{border-bottom:none;padding-bottom:0}
+.step:first-child{padding-top:0}
+.step .dot{flex:none;width:8px;height:8px;border-radius:50%;margin-top:7px}
+.d-green{background:var(--accent)}.d-amber{background:var(--amber)}.d-red{background:var(--red)}
+.step .sc{flex:1}
+.step b{display:block;font-size:.9rem;color:var(--deep);margin-bottom:2px}
+.step span{font-size:.85rem}
+
+/* ============ CALLOUTS ============ */
+.alert{
+  background:var(--red-bg);border-left:3px solid var(--red);
+  border-radius:0 9px 9px 0;padding:9px 11px;margin-top:11px;font-size:.86rem;
+}
+.alert b{color:var(--red)}
+.note{
+  background:var(--accent-bg);border-left:3px solid var(--accent);
+  border-radius:0 9px 9px 0;padding:9px 11px;margin-top:11px;font-size:.85rem;
+}
+.note b{color:var(--accent)}
+
+/* ============ TABLE ============ */
+table.cmp{width:100%;border-collapse:collapse;font-size:.82rem;margin-top:3px}
+table.cmp th{background:var(--deep);color:#fff;font-weight:600;padding:7px 8px;text-align:left;font-size:.72rem;letter-spacing:.3px}
+table.cmp th:first-child{border-radius:7px 0 0 0}
+table.cmp th:last-child{border-radius:0 7px 0 0}
+table.cmp td{padding:7px 8px;border-bottom:1px solid var(--line2);vertical-align:top}
+table.cmp tr:last-child td{border-bottom:none}
+table.cmp td:first-child{font-weight:600;color:var(--deep);white-space:nowrap}
+
+footer{
+  text-align:center;padding:24px 20px 32px;
+  font-size:.7rem;color:var(--muted);font-weight:300;line-height:1.75;
+}
+footer .line{width:30px;height:3px;background:var(--accent);border-radius:2px;margin:0 auto 11px}
+</style>
+</head>
+<body>
+
+<header>
+  <svg class="mark" viewBox="0 0 100 100" aria-hidden="true">
+    <circle cx="50" cy="50" r="46" fill="none" stroke="#fff" stroke-width="3"/>
+    <path d="M50 16 L50 84 M26 34 L74 66 M74 34 L26 66" stroke="#fff" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+    <circle cx="50" cy="50" r="15" fill="#fff"/>
+  </svg>
+  <h1>Synoviocentesis &amp; Lavage</h1>
+  <p class="sub">Joints, tendon sheaths and bursae in cattle</p>
+</header>
+
+<div id="figbar">
+  <span class="fb-t"><b>No figures yet.</b> Tap to load your zip — this device will remember it.</span>
+  <input type="file" id="figin" accept="image/*,.zip,application/zip" multiple style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0">
+  <button id="figbtn">Add figures</button>
+</div>
+<div id="figok">
+  <span class="fo-t" id="figokt"></span>
+  <button id="figclear">replace</button>
+</div>
+
+<nav class="tabs">
+  <button class="on" data-v="fore">Forelimb</button>
+  <button data-v="digit">Digit</button>
+  <button data-v="hind">Hindlimb</button>
+</nav>
+<nav class="tabs2">
+  <span class="t2lab">Reference</span>
+  <button data-v="fluid">Fluid</button>
+  <button data-v="prep">Prep</button>
+  <button data-v="decide">Decide</button>
+</nav>
+
+<main>
+
+<section class="view on" id="fore">
+  <div class="search-wrap">
+    <input type="search" class="q" placeholder="Search…" autocomplete="off">
+    <svg class="si" viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27A6.47 6.47 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
+  </div>
+
+  <div class="seclead"><b>Thoracic limb</b><span>4 joints · 1 sheath · 2 bursae</span></div>
+
+  <article class="jcard" data-j>
+    <div class="jhead"><div class="num">1</div>
+      <div class="t"><b>Shoulder</b><span>Scapulohumeral</span></div>
+      <svg class="chev" viewBox="0 0 24 24"><path d="M7.4 8.6 12 13.2l4.6-4.6L18 10l-6 6-6-6z"/></svg></div>
+    <div class="jbody">
+      <div class="field"><h4><svg class="ic" viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20z"/></svg>Palpate</h4>
+        <p><span class="anat">Cranial + caudal prominences of the greater tubercle</span> and the notch between them; then the <span class="anat">infraspinatus tendon</span> — every approach is measured off it.</p></div>
+      <div class="field"><h4><svg class="ic" viewBox="0 0 24 24"><path d="M20.7 5.3 18.7 3.3a1 1 0 0 0-1.4 0l-2.3 2.3 3.4 3.4 2.3-2.3a1 1 0 0 0 0-1.4zM3 17.2V21h3.8L17.4 10.4 13.6 6.6 3 17.2z"/></svg>Needle</h4>
+        <p>Spinal 18–20 G, <span class="num">7–10 cm</span>. <b>Caudolateral</b>, entering just <span class="anat">caudal to the infraspinatus tendon</span>, aimed craniomedially into the caudal recess.</p></div>
+      <div class="field"><h4><svg class="ic" viewBox="0 0 24 24"><path d="M12 2 4 7v10l8 5 8-5V7l-8-5z"/></svg>Then</h4>
+        <p>Second cannula into the same caudal recess. Arthroscopic reference: <span class="num">1 cm</span> caudal to the tendon border, <span class="num">1 cm</span> proximal to the caudal tubercle.</p></div>
+      <div class="field"><h4><svg class="ic" viewBox="0 0 24 24"><path d="M12 2s6 6.5 6 11a6 6 0 0 1-12 0c0-4.5 6-11 6-11z"/></svg>Lavage</h4>
+        <p><span class="num">1–2 L</span> · two cannulas <span class="num">1.6–2.0 mm</span> · epidural or GA, not standing</p></div>
+      <div class="field pit"><h4><svg class="ic" viewBox="0 0 24 24"><path d="M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z"/></svg>Watch out</h4>
+        <p>Second hardest joint after the hip. Effusion is <b>not palpable</b> — capsule sits under thick muscle. Suprascapular nerve close. <b>Never tap without ultrasound.</b></p></div>
+      <details class="figwrap"><summary>Show figure</summary><div class="figslot"><img data-fig="shoulder-synovial.png" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Shoulder"><span class="zoomhint"><svg viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27A6.47 6.47 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zM9.5 14C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14zm.5-7H9v2H7v1h2v2h1v-2h2V9h-2z"/></svg>tap</span></div></details>
+      <div class="src">Nuss et al., <i>Arthrocentesis in cattle</i> Pt 1, 2002 · Nuss, SAT 2003 · BMC Vet Res 2020 (arthroscopic approaches) · Budras p. 13</div>
+    </div>
+  </article>
+
+  <article class="jcard" data-j>
+    <div class="jhead"><div class="num">2</div>
+      <div class="t"><b>Elbow</b><span>Cubital</span></div>
+      <svg class="chev" viewBox="0 0 24 24"><path d="M7.4 8.6 12 13.2l4.6-4.6L18 10l-6 6-6-6z"/></svg></div>
+    <div class="jbody">
+      <div class="field"><h4><svg class="ic" viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20z"/></svg>Palpate</h4>
+        <p><span class="anat">Lateral humeral epicondyle</span>, <span class="anat">olecranon tip</span>, and the <span class="anat">lateral collateral ligament</span> between them.</p></div>
+      <div class="field"><h4><svg class="ic" viewBox="0 0 24 24"><path d="M20.7 5.3 18.7 3.3a1 1 0 0 0-1.4 0l-2.3 2.3 3.4 3.4 2.3-2.3a1 1 0 0 0 0-1.4zM3 17.2V21h3.8L17.4 10.4 13.6 6.6 3 17.2z"/></svg>Needle</h4>
+        <p>18 G, <span class="num">5–7 cm</span>. Enter just <b>caudal to the caudal border of the lateral collateral ligament</b>, directed <b>craniomedially</b> into the radiohumeral space.</p></div>
+      <div class="field"><h4><svg class="ic" viewBox="0 0 24 24"><path d="M12 2 4 7v10l8 5 8-5V7l-8-5z"/></svg>Then</h4>
+        <p>The <span class="anat">caudomedial pouch</span> — in sepsis this is not optional.</p></div>
+      <div class="field"><h4><svg class="ic" viewBox="0 0 24 24"><path d="M12 2s6 6.5 6 11a6 6 0 0 1-12 0c0-4.5 6-11 6-11z"/></svg>Lavage</h4>
+        <p><span class="num">1–2 L</span> 0.9% NaCl</p></div>
+      <div class="field pit"><h4><svg class="ic" viewBox="0 0 24 24"><path d="M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z"/></svg>Watch out</h4>
+        <p>Lavage from lateral alone leaves fibrin in the caudomedial pouch, and the joint then “fails to respond”.</p></div>
+      <details class="figwrap"><summary>Show figure</summary><div class="figslot"><img data-fig="elbow-injection.png" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Elbow"><span class="zoomhint"><svg viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27A6.47 6.47 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zM9.5 14C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14zm.5-7H9v2H7v1h2v2h1v-2h2V9h-2z"/></svg>tap</span></div></details>
+      <div class="src">Nuss et al., Pt 1, 2002 · Borges et al., BMTW 2015 · Budras Fig. 12.1, p. 126</div>
+    </div>
+  </article>
+
+  <article class="jcard" data-j>
+    <div class="jhead"><div class="num">3</div>
+      <div class="t"><b>Carpus</b><span>Antebrachiocarpal · middle · CMC</span></div>
+      <svg class="chev" viewBox="0 0 24 24"><path d="M7.4 8.6 12 13.2l4.6-4.6L18 10l-6 6-6-6z"/></svg></div>
+    <div class="jbody">
+      <div class="field"><h4><svg class="ic" viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20z"/></svg>Palpate</h4>
+        <p>Flex to 90°: the space opens as a <span class="anat">dorsal depression just distal to the radius</span>.</p><p>Effusion shows as filling of the <span class="anat">palmar recess proximal to the accessory carpal bone</span>.</p></div>
+      <div class="field"><h4><svg class="ic" viewBox="0 0 24 24"><path d="M20.7 5.3 18.7 3.3a1 1 0 0 0-1.4 0l-2.3 2.3 3.4 3.4 2.3-2.3a1 1 0 0 0 0-1.4zM3 17.2V21h3.8L17.4 10.4 13.6 6.6 3 17.2z"/></svg>Needle</h4>
+        <p>18–20 G. <b>Dorsal, in flexion</b>, either side of the extensor tendons. Tap each compartment you want to assess <b>separately</b>.</p></div>
+      <div class="field"><h4><svg class="ic" viewBox="0 0 24 24"><path d="M12 2 4 7v10l8 5 8-5V7l-8-5z"/></svg>Then</h4>
+        <p>The <span class="anat">palmar pouches</span> — large, and where fibrin and pus collect.</p></div>
+      <div class="field"><h4><svg class="ic" viewBox="0 0 24 24"><path d="M12 2s6 6.5 6 11a6 6 0 0 1-12 0c0-4.5 6-11 6-11z"/></svg>Lavage</h4>
+        <p><span class="num">1–3 L</span> · two cannulas <span class="num">1.6–2.0 mm</span> · IVRA + IVRLP</p></div>
+      <div class="field pit"><h4><svg class="ic" viewBox="0 0 24 24"><path d="M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z"/></svg>Watch out</h4>
+        <p>Three joints, not one. Antebrachiocarpal <b>rarely</b> talks to the midcarpal; midcarpal and CMC <b>always</b> do. Lavaging one does not lavage the others.</p></div>
+      <details class="figwrap"><summary>Show figure</summary><div class="figslot"><img data-fig="carpus-injection.png" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Carpus"><span class="zoomhint"><svg viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27A6.47 6.47 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zM9.5 14C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14zm.5-7H9v2H7v1h2v2h1v-2h2V9h-2z"/></svg>tap</span></div></details>
+      <div class="src">Nuss et al., Pt 1, 2002 · Desrochers et al., AJVR 1997 · Kofler &amp; Martinek 2004 · Budras Fig. 12.2 and p. 127</div>
+    </div>
+  </article>
+
+  <article class="jcard" data-j>
+    <div class="jhead"><div class="num">4</div>
+      <div class="t"><b>Fetlock</b><span>Metacarpo-/metatarsophalangeal</span></div>
+      <svg class="chev" viewBox="0 0 24 24"><path d="M7.4 8.6 12 13.2l4.6-4.6L18 10l-6 6-6-6z"/></svg></div>
+    <div class="jbody">
+      <div class="field"><h4><svg class="ic" viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20z"/></svg>Palpate</h4>
+        <p>The <span class="anat">dorsoproximal pouch</span> bulges with even slight effusion, <span class="anat">abaxial to the common digital extensor</span>.</p></div>
+      <div class="field"><h4><svg class="ic" viewBox="0 0 24 24"><path d="M20.7 5.3 18.7 3.3a1 1 0 0 0-1.4 0l-2.3 2.3 3.4 3.4 2.3-2.3a1 1 0 0 0 0-1.4zM3 17.2V21h3.8L17.4 10.4 13.6 6.6 3 17.2z"/></svg>Needle</h4>
+        <p>19 G. <b>Dorsal:</b> find the angle between the <span class="anat">dorsal margin of P1</span> and the <span class="anat">rounded metacarpal joint surface</span>; insert <b>abaxially, aimed at the axial surface, under the extensor tendon</b>.</p></div>
+      <div class="field"><h4><svg class="ic" viewBox="0 0 24 24"><path d="M12 2 4 7v10l8 5 8-5V7l-8-5z"/></svg>Then</h4>
+        <p><b>Plantar triangle:</b> bounded by the <span class="anat">caudal margin of the cannon bone</span>, the <span class="anat">proximal edge of the abaxial sesamoid</span> and the <span class="anat">abaxial contour of the interosseus</span>. <b>Flex the fetlock</b>, insert <span class="num">~2 cm</span> into its centre, <b>axiodistally</b>.</p></div>
+      <div class="field"><h4><svg class="ic" viewBox="0 0 24 24"><path d="M12 2s6 6.5 6 11a6 6 0 0 1-12 0c0-4.5 6-11 6-11z"/></svg>Lavage</h4>
+        <p><span class="num">1–2.5 L</span> ± povidone-iodine <span class="num">0.1%</span></p></div>
+      <div class="field pit"><h4><svg class="ic" viewBox="0 0 24 24"><path d="M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z"/></svg>Watch out</h4>
+        <p>Digits III and IV communicate through a slit at the <i>incisura intercapitalis</i> — wide enough for infection to cross, <b>too narrow to flush both from one side</b>.</p></div>
+      <details class="figwrap"><summary>Show figure</summary><div class="figslot"><img data-fig="fetlock-injection.png" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Fetlock"><span class="zoomhint"><svg viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27A6.47 6.47 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zM9.5 14C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14zm.5-7H9v2H7v1h2v2h1v-2h2V9h-2z"/></svg>tap</span></div></details>
+      <div class="src">Budras Fig. 12.3 and p. 127 · Nuss et al., Pt 1, 2002 · Kofler &amp; Martinek, Vet J 2005 · Hund, Senn &amp; Kofler, Animals 2020</div>
+    </div>
+  </article>
+
+  <article class="jcard" data-j>
+    <div class="jhead"><div class="num">5</div>
+      <div class="t"><b>Carpal tendon sheaths</b><span>Extensor + flexor sheaths</span></div>
+      <svg class="chev" viewBox="0 0 24 24"><path d="M7.4 8.6 12 13.2l4.6-4.6L18 10l-6 6-6-6z"/></svg></div>
+    <div class="jbody">
+      <div class="field"><h4><svg class="ic" viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20z"/></svg>Palpate</h4>
+        <p>Swelling runs <b>along a tendon</b>, above and below the carpus — not the dorsal joint-centred bulge.</p><p>Have sheaths: <span class="anat">ext. carpi obliquus</span>, <span class="anat">digital extensors</span>, <span class="anat">flexor carpi radialis</span>. Do not: <span class="anat">ext. carpi radialis</span>, <span class="anat">ulnaris lateralis</span>.</p></div>
+      <div class="field"><h4><svg class="ic" viewBox="0 0 24 24"><path d="M20.7 5.3 18.7 3.3a1 1 0 0 0-1.4 0l-2.3 2.3 3.4 3.4 2.3-2.3a1 1 0 0 0 0-1.4zM3 17.2V21h3.8L17.4 10.4 13.6 6.6 3 17.2z"/></svg>Needle</h4>
+        <p>18–20 G, into the sonographically identified lumen at maximum distension, <b>parallel to the tendon fibres</b>.</p></div>
+      <div class="field"><h4><svg class="ic" viewBox="0 0 24 24"><path d="M12 2 4 7v10l8 5 8-5V7l-8-5z"/></svg>Then</h4>
+        <p>Second portal at the far end of the distended lumen.</p></div>
+      <div class="field"><h4><svg class="ic" viewBox="0 0 24 24"><path d="M12 2s6 6.5 6 11a6 6 0 0 1-12 0c0-4.5 6-11 6-11z"/></svg>Lavage</h4>
+        <p>Small — lumen size dictates it. Septic cases usually need open debridement and drains.</p></div>
+      <div class="field pit"><h4><svg class="ic" viewBox="0 0 24 24"><path d="M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z"/></svg>Watch out</h4>
+        <p>A swollen carpus has four causes needing four treatments: arthritis, tenosynovitis, precarpal hygroma, periarticular abscess. Scan each pouch and tendon separately.</p></div>
+      <details class="figwrap"><summary>Show figure</summary><div class="figslot"><img data-fig="carpus-synovial.png" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Carpal tendon sheaths"><span class="zoomhint"><svg viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27A6.47 6.47 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zM9.5 14C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14zm.5-7H9v2H7v1h2v2h1v-2h2V9h-2z"/></svg>tap</span></div></details>
+      <div class="src">Kofler &amp; Martinek, Tierärztl Prax 2004 (42 cattle) · Kofler, Vet Clin Food Anim 2009 · Budras p. 12</div>
+    </div>
+  </article>
+
+  <article class="jcard" data-j>
+    <div class="jhead"><div class="num">6</div>
+      <div class="t"><b>Precarpal bursa / hygroma</b><span>Bursa subcutanea praecarpalis</span></div>
+      <svg class="chev" viewBox="0 0 24 24"><path d="M7.4 8.6 12 13.2l4.6-4.6L18 10l-6 6-6-6z"/></svg></div>
+    <div class="jbody">
+      <div class="field"><h4><svg class="ic" viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20z"/></svg>Palpate</h4>
+        <p>Soft, fluctuant, <b>superficial</b> swelling on the <span class="anat">dorsal carpus</span>, from <span class="anat">midcarpal joint to just below the metacarpal tuberosity</span>.</p><p>Starts as <span class="anat">hairless hyperkeratotic skin</span> where cubicles are too short. Can reach the size of a man's head.</p></div>
+      <div class="field"><h4><svg class="ic" viewBox="0 0 24 24"><path d="M20.7 5.3 18.7 3.3a1 1 0 0 0-1.4 0l-2.3 2.3 3.4 3.4 2.3-2.3a1 1 0 0 0 0-1.4zM3 17.2V21h3.8L17.4 10.4 13.6 6.6 3 17.2z"/></svg>Needle</h4>
+        <p>16–18 G into the fluctuant centre, aseptically. Submit for cytology and culture if infection is suspected.</p></div>
+      <div class="field"><h4><svg class="ic" viewBox="0 0 24 24"><path d="M12 2 4 7v10l8 5 8-5V7l-8-5z"/></svg>Then</h4>
+        <p><b>Before draining, prove it is extra-articular</b> — ultrasound or contrast. It usually does not communicate, but “usually” is not a plan.</p></div>
+      <div class="field"><h4><svg class="ic" viewBox="0 0 24 24"><path d="M12 2s6 6.5 6 11a6 6 0 0 1-12 0c0-4.5 6-11 6-11z"/></svg>Lavage</h4>
+        <p>Lameness is <b>mild</b> unless infected, then moderate to severe.</p></div>
+      <div class="field pit"><h4><svg class="ic" viewBox="0 0 24 24"><path d="M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z"/></svg>Watch out</h4>
+        <p>A bursa may fill <i>because</i> the joint or sheath under it is effused — then the bursa is the symptom. Image before you needle. At surgery, do not breach the synovial structures.</p></div>
+      <details class="figwrap"><summary>Show figure</summary><div class="figslot"><img data-fig="precarpal-bursa.png" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Precarpal bursa / hygroma"><span class="zoomhint"><svg viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27A6.47 6.47 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zM9.5 14C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14zm.5-7H9v2H7v1h2v2h1v-2h2V9h-2z"/></svg>tap</span></div></details>
+      <div class="src">Budras pp. 12, 126–127 · Kofler &amp; Martinek, Tierärztl Prax 2004 · Seyrek-Intas et al., Vet Radiol Ultrasound 2005</div>
+    </div>
+  </article>
+
+  <article class="jcard" data-j>
+    <div class="jhead"><div class="num">7</div>
+      <div class="t"><b>Olecranon &amp; acquired bursae</b><span>Capped elbow · presternal</span></div>
+      <svg class="chev" viewBox="0 0 24 24"><path d="M7.4 8.6 12 13.2l4.6-4.6L18 10l-6 6-6-6z"/></svg></div>
+    <div class="jbody">
+      <div class="field"><h4><svg class="ic" viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20z"/></svg>Palpate</h4>
+        <p>Firm or fluctuant swelling over the <span class="anat">point of the elbow</span> or the <span class="anat">sternum</span>. Pressure lesions, same mechanism as the carpal hygroma.</p><p><span class="anat">Subcutaneous olecranon bursa</span> lies superficial on the caudal olecranon; the <span class="anat">bursa of triceps brachii</span> sits deeper, under the terminal tendon.</p></div>
+      <div class="field"><h4><svg class="ic" viewBox="0 0 24 24"><path d="M20.7 5.3 18.7 3.3a1 1 0 0 0-1.4 0l-2.3 2.3 3.4 3.4 2.3-2.3a1 1 0 0 0 0-1.4zM3 17.2V21h3.8L17.4 10.4 13.6 6.6 3 17.2z"/></svg>Needle</h4>
+        <p>16–18 G, central aspiration after ultrasound confirms fluid. Expect viscous straw-coloured fluid if aseptic.</p></div>
+      <div class="field"><h4><svg class="ic" viewBox="0 0 24 24"><path d="M12 2s6 6.5 6 11a6 6 0 0 1-12 0c0-4.5 6-11 6-11z"/></svg>Lavage</h4>
+        <p>Excision works well for the chronic fibrous form.</p></div>
+      <div class="field pit"><h4><svg class="ic" viewBox="0 0 24 24"><path d="M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z"/></svg>Watch out</h4>
+        <p>Repeated drainage without fixing the lying surface achieves nothing and risks seeding it. Treat the cubicle.</p></div>
+      <details class="figwrap"><summary>Show figure</summary><div class="figslot"><img data-fig="olecranon-bursa.png" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Olecranon &amp; acquired bursae"><span class="zoomhint"><svg viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27A6.47 6.47 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zM9.5 14C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14zm.5-7H9v2H7v1h2v2h1v-2h2V9h-2z"/></svg>tap</span></div></details>
+      <div class="src">Budras pp. 12, 135 · Seyrek-Intas et al. 2005 · Kofler &amp; Martinek 2004</div>
+    </div>
+  </article>
+
+  <p class="nores" style="display:none;text-align:center;color:var(--muted);font-size:.88rem;padding:22px 0">Nothing matches</p>
+</section>
+
+<section class="view" id="digit">
+  <div class="search-wrap">
+    <input type="search" class="q" placeholder="Search…" autocomplete="off">
+    <svg class="si" viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27A6.47 6.47 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
+  </div>
+
+  <div class="seclead"><b>Digit</b><span>2 joints · 1 sheath</span></div>
+
+  <article class="jcard" data-j>
+    <div class="jhead"><div class="num">1</div>
+      <div class="t"><b>PIP — pastern</b><span>Proximal interphalangeal</span></div>
+      <svg class="chev" viewBox="0 0 24 24"><path d="M7.4 8.6 12 13.2l4.6-4.6L18 10l-6 6-6-6z"/></svg></div>
+    <div class="jbody">
+      <div class="field"><h4><svg class="ic" viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20z"/></svg>Palpate</h4>
+        <p>Localised swelling <span class="anat">between fetlock and coronary band</span>. Usually follows a penetrating interdigital wound.</p></div>
+      <div class="field"><h4><svg class="ic" viewBox="0 0 24 24"><path d="M20.7 5.3 18.7 3.3a1 1 0 0 0-1.4 0l-2.3 2.3 3.4 3.4 2.3-2.3a1 1 0 0 0 0-1.4zM3 17.2V21h3.8L17.4 10.4 13.6 6.6 3 17.2z"/></svg>Needle</h4>
+        <p>18–20 G short. <b>Dorsoabaxial</b>, needle <b>perpendicular to the long axis of the pastern</b>.</p></div>
+      <div class="field"><h4><svg class="ic" viewBox="0 0 24 24"><path d="M12 2 4 7v10l8 5 8-5V7l-8-5z"/></svg>Then</h4>
+        <p>Opposing needle, abaxial or axial.</p></div>
+      <div class="field"><h4><svg class="ic" viewBox="0 0 24 24"><path d="M12 2s6 6.5 6 11a6 6 0 0 1-12 0c0-4.5 6-11 6-11z"/></svg>Lavage</h4>
+        <p><span class="num">0.5–1 L</span> until the efflux runs clear · IVRA with tourniquet</p></div>
+      <div class="field pit"><h4><svg class="ic" viewBox="0 0 24 24"><path d="M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z"/></svg>Watch out</h4>
+        <p>The flexor sheath runs <b>directly behind</b> — easy to tap it instead. The two pastern joints do not communicate with each other, but their dorsal pouches reach the coffin joint's.</p></div>
+      <details class="figwrap"><summary>Show figure</summary><div class="figslot"><img data-fig="digital-joints.png" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="PIP — pastern"><span class="zoomhint"><svg viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27A6.47 6.47 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zM9.5 14C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14zm.5-7H9v2H7v1h2v2h1v-2h2V9h-2z"/></svg>tap</span></div></details>
+      <div class="src">Kofler, BMTW 1995 · Desrochers &amp; Francoz 2014 · Burgstaller &amp; Kofler 2016 · Budras p. 12</div>
+    </div>
+  </article>
+
+  <article class="jcard" data-j>
+    <div class="jhead"><div class="num">2</div>
+      <div class="t"><b>DIP — coffin</b><span>Distal interphalangeal</span></div>
+      <svg class="chev" viewBox="0 0 24 24"><path d="M7.4 8.6 12 13.2l4.6-4.6L18 10l-6 6-6-6z"/></svg></div>
+    <div class="jbody">
+      <div class="field"><h4><svg class="ic" viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20z"/></svg>Palpate</h4>
+        <p>Painful swelling at the <span class="anat">caudal third of the abaxial coronet</span>.</p><p>A <span class="anat">draining tract at the dorsal coronary band</span> is near-diagnostic. Grade 4–5 lame.</p></div>
+      <div class="field"><h4><svg class="ic" viewBox="0 0 24 24"><path d="M20.7 5.3 18.7 3.3a1 1 0 0 0-1.4 0l-2.3 2.3 3.4 3.4 2.3-2.3a1 1 0 0 0 0-1.4zM3 17.2V21h3.8L17.4 10.4 13.6 6.6 3 17.2z"/></svg>Needle</h4>
+        <p><b>14 G × <span class="num">5 cm</span></b>, dorsoproximal to the coronary band, axial or abaxial to the extensor tendon, at <b><span class="num">60°</span> to the coronary band</b>.</p></div>
+      <div class="field"><h4><svg class="ic" viewBox="0 0 24 24"><path d="M12 2 4 7v10l8 5 8-5V7l-8-5z"/></svg>Then</h4>
+        <p><b>Palmar/plantar to the abaxial collateral ligament.</b></p></div>
+      <div class="field"><h4><svg class="ic" viewBox="0 0 24 24"><path d="M12 2s6 6.5 6 11a6 6 0 0 1-12 0c0-4.5 6-11 6-11z"/></svg>Lavage</h4>
+        <p><span class="num">~1 L</span> until clear and fibrin-free · IVRA + IVRLP</p></div>
+      <div class="field pit"><h4><svg class="ic" viewBox="0 0 24 24"><path d="M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z"/></svg>Watch out</h4>
+        <p>Lavage suits only <b>acute closed</b> arthritis. Fibrin, pus or a penetrating wound → resection or amputation. Navicular bursa and DDFT sit immediately palmar.</p></div>
+      <details class="figwrap"><summary>Show figure</summary><div class="figslot"><img data-fig="hoof-sagittal.png" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="DIP — coffin"><span class="zoomhint"><svg viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27A6.47 6.47 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zM9.5 14C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14zm.5-7H9v2H7v1h2v2h1v-2h2V9h-2z"/></svg>tap</span></div></details>
+      <div class="src">Desrochers &amp; St-Jean, Vet Clin Food Anim 2008 · Heppelmann et al. 2009 · Starke et al., Vet Surg 2007 · Budras p. 27</div>
+    </div>
+  </article>
+
+  <article class="jcard" data-j>
+    <div class="jhead"><div class="num">3</div>
+      <div class="t"><b>Digital flexor tendon sheath</b><span>DFTS</span></div>
+      <svg class="chev" viewBox="0 0 24 24"><path d="M7.4 8.6 12 13.2l4.6-4.6L18 10l-6 6-6-6z"/></svg></div>
+    <div class="jbody">
+      <div class="field"><h4><svg class="ic" viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20z"/></svg>Palpate</h4>
+        <p><b>Elongated</b> swelling along the palmar/plantar fetlock, running proximally — not the round joint bulge.</p><p>Spans <span class="anat">distal third of the cannon to the coronary band of the heel bulbs</span>.</p></div>
+      <div class="field"><h4><svg class="ic" viewBox="0 0 24 24"><path d="M20.7 5.3 18.7 3.3a1 1 0 0 0-1.4 0l-2.3 2.3 3.4 3.4 2.3-2.3a1 1 0 0 0 0-1.4zM3 17.2V21h3.8L17.4 10.4 13.6 6.6 3 17.2z"/></svg>Needle</h4>
+        <p>18 G. <b>Abaxial</b>, into the <span class="anat">concavity palpable between the tendons and the interosseus with the fetlock flexed</span>.</p></div>
+      <div class="field"><h4><svg class="ic" viewBox="0 0 24 24"><path d="M12 2 4 7v10l8 5 8-5V7l-8-5z"/></svg>Then</h4>
+        <p><b>Two compartments.</b> Outer and inner proximally, joined only in the common distal compartment — so closed irrigation is <b>difficult to impossible</b>. Plan open debridement and drainage.</p></div>
+      <div class="field"><h4><svg class="ic" viewBox="0 0 24 24"><path d="M12 2s6 6.5 6 11a6 6 0 0 1-12 0c0-4.5 6-11 6-11z"/></svg>Lavage</h4>
+        <p>If going through the sheath to the fetlock: <span class="num">3 cm</span> incision, between two branches of the medial interosseus, then <span class="num">3 L</span> via a dorsal needle.</p></div>
+      <div class="field pit"><h4><svg class="ic" viewBox="0 0 24 24"><path d="M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z"/></svg>Watch out</h4>
+        <p>Sheaths of III and IV are separated proximally by a <b>thin wall that must not be incised</b>. Lavaging the joint while the sheath is infected is a guaranteed failure.</p></div>
+      <details class="figwrap"><summary>Show figure</summary><div class="figslot"><img data-fig="dfts-contrast.png" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Digital flexor tendon sheath"><span class="zoomhint"><svg viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27A6.47 6.47 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zM9.5 14C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14zm.5-7H9v2H7v1h2v2h1v-2h2V9h-2z"/></svg>tap</span></div></details>
+      <div class="src">Budras p. 130 and Fig. 22.1 · Kofler &amp; Martinek, Vet J 2005 · Bertagnoli et al., Vet J 2012 · Hund, Senn &amp; Kofler, Animals 2020 (CC BY)</div>
+    </div>
+  </article>
+
+  <p class="nores" style="display:none;text-align:center;color:var(--muted);font-size:.88rem;padding:22px 0">Nothing matches</p>
+</section>
+
+<section class="view" id="hind">
+  <div class="search-wrap">
+    <input type="search" class="q" placeholder="Search…" autocomplete="off">
+    <svg class="si" viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27A6.47 6.47 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
+  </div>
+
+  <div class="seclead"><b>Pelvic limb</b><span>4 joints · 1 sheath · 1 bursa</span></div>
+
+  <article class="jcard" data-j>
+    <div class="jhead"><div class="num">1</div>
+      <div class="t"><b>Hip</b><span>Coxofemoral</span></div>
+      <svg class="chev" viewBox="0 0 24 24"><path d="M7.4 8.6 12 13.2l4.6-4.6L18 10l-6 6-6-6z"/></svg></div>
+    <div class="jbody">
+      <div class="field"><h4><svg class="ic" viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20z"/></svg>Palpate</h4>
+        <p>The <span class="anat">greater trochanter</span> is the only anchor. Gluteal atrophy supports it. Effusion is not palpable at all.</p></div>
+      <div class="field"><h4><svg class="ic" viewBox="0 0 24 24"><path d="M20.7 5.3 18.7 3.3a1 1 0 0 0-1.4 0l-2.3 2.3 3.4 3.4 2.3-2.3a1 1 0 0 0 0-1.4zM3 17.2V21h3.8L17.4 10.4 13.6 6.6 3 17.2z"/></svg>Needle</h4>
+        <p>Spinal 16–18 G, <span class="num">15 cm+</span> in an adult. <b>Dorsolateral</b> — dorsal to the greater trochanter, directed <b>ventromedially</b>.</p></div>
+      <div class="field"><h4><svg class="ic" viewBox="0 0 24 24"><path d="M12 2 4 7v10l8 5 8-5V7l-8-5z"/></svg>Then</h4>
+        <p>Lavage possible but difficult, under epidural. Arthrotomy is not a field procedure.</p></div>
+      <div class="field pit"><h4><svg class="ic" viewBox="0 0 24 24"><path d="M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z"/></svg>Watch out</h4>
+        <p><b>Avoid any caudal approach — sciatic nerve.</b> Strike the acetabular rim → angle distally. Without ultrasound this is guesswork.</p></div>
+      <details class="figwrap"><summary>Show figure</summary><div class="figslot"><img data-fig="hip-synovial.png" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Hip"><span class="zoomhint"><svg viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27A6.47 6.47 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zM9.5 14C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14zm.5-7H9v2H7v1h2v2h1v-2h2V9h-2z"/></svg>tap</span></div></details>
+      <div class="src">Nuss et al., <i>Arthrocentesis in cattle</i> Pt 2, 2002 · Nuss, SAT 2003 · Grubelnik et al., BMTW 2002 · Budras p. 29</div>
+    </div>
+  </article>
+
+  <article class="jcard" data-j>
+    <div class="jhead"><div class="num">2</div>
+      <div class="t"><b>Stifle</b><span>Femoropatellar + femorotibial</span></div>
+      <svg class="chev" viewBox="0 0 24 24"><path d="M7.4 8.6 12 13.2l4.6-4.6L18 10l-6 6-6-6z"/></svg></div>
+    <div class="jbody">
+      <div class="field"><h4><svg class="ic" viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20z"/></svg>Palpate</h4>
+        <p><span class="anat">Patella</span>, the <span class="anat">three patellar ligaments</span>, the <span class="anat">tibial tuberosity</span>. The lateral parapatellar pouch fills first.</p></div>
+      <div class="field"><h4><svg class="ic" viewBox="0 0 24 24"><path d="M20.7 5.3 18.7 3.3a1 1 0 0 0-1.4 0l-2.3 2.3 3.4 3.4 2.3-2.3a1 1 0 0 0 0-1.4zM3 17.2V21h3.8L17.4 10.4 13.6 6.6 3 17.2z"/></svg>Needle</h4>
+        <p>16–18 G, <span class="num">7–9 cm</span>. <b>Femoropatellar:</b> <span class="num">4 cm</span> proximal to the tibial tuberosity, <b>between the medial and middle patellar ligaments</b>.</p></div>
+      <div class="field"><h4><svg class="ic" viewBox="0 0 24 24"><path d="M12 2 4 7v10l8 5 8-5V7l-8-5z"/></svg>Then</h4>
+        <p><b>Lateral femorotibial:</b> in the <span class="anat">extensor groove of the tibia, on the border of the peroneus tertius tendon</span>.</p></div>
+      <div class="field"><h4><svg class="ic" viewBox="0 0 24 24"><path d="M12 2s6 6.5 6 11a6 6 0 0 1-12 0c0-4.5 6-11 6-11z"/></svg>Lavage</h4>
+        <p><span class="num">2–4 L</span> · epidural; GA in calves</p></div>
+      <div class="field pit"><h4><svg class="ic" viewBox="0 0 24 24"><path d="M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z"/></svg>Watch out</h4>
+        <p>FP and medial FT <b>always</b> communicate; all three only in ~57%. The <b>lateral FT communicates with nothing</b> — treat it as a separate procedure.</p></div>
+      <details class="figwrap"><summary>Show figure</summary><div class="figslot"><img data-fig="stifle-injection.png" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Stifle"><span class="zoomhint"><svg viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27A6.47 6.47 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zM9.5 14C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14zm.5-7H9v2H7v1h2v2h1v-2h2V9h-2z"/></svg>tap</span></div></details>
+      <div class="src">Nuss et al., Pt 2, 2002 · Desrochers 1995 · Desrochers et al. 1996 · Budras p. 28 and Fig. 28.1</div>
+    </div>
+  </article>
+
+  <article class="jcard" data-j>
+    <div class="jhead"><div class="num">3</div>
+      <div class="t"><b>Tarsocrural</b><span>Tibiotarsal</span></div>
+      <svg class="chev" viewBox="0 0 24 24"><path d="M7.4 8.6 12 13.2l4.6-4.6L18 10l-6 6-6-6z"/></svg></div>
+    <div class="jbody">
+      <div class="field"><h4><svg class="ic" viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20z"/></svg>Palpate</h4>
+        <p>Run from the <span class="anat">distal end of the lateral malleolus</span> forward to the <span class="anat">cranial edge of the tibia</span>, to where the <span class="anat">talus</span> is felt.</p><p>Two plantar recesses lie in the <span class="anat">angle between the distal caudal tibia and the cranial calcaneus</span>.</p></div>
+      <div class="field"><h4><svg class="ic" viewBox="0 0 24 24"><path d="M20.7 5.3 18.7 3.3a1 1 0 0 0-1.4 0l-2.3 2.3 3.4 3.4 2.3-2.3a1 1 0 0 0 0-1.4zM3 17.2V21h3.8L17.4 10.4 13.6 6.6 3 17.2z"/></svg>Needle</h4>
+        <p>16–18 G. The <b>dorsomedial recess is the optimal diagnostic site</b>; dorsolateral is the best scope portal.</p></div>
+      <div class="field"><h4><svg class="ic" viewBox="0 0 24 24"><path d="M12 2 4 7v10l8 5 8-5V7l-8-5z"/></svg>Then</h4>
+        <p><b>Plantarolateral</b> into the plantar recess — and from here <b>lavage works in the standing animal</b>.</p></div>
+      <div class="field"><h4><svg class="ic" viewBox="0 0 24 24"><path d="M12 2s6 6.5 6 11a6 6 0 0 1-12 0c0-4.5 6-11 6-11z"/></svg>Lavage</h4>
+        <p><span class="num">1.5–3 L</span> · IVRA + IVRLP · <b>at least two diagonal recesses, cranial to caudal</b></p></div>
+      <div class="field pit"><h4><svg class="ic" viewBox="0 0 24 24"><path d="M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z"/></svg>Watch out</h4>
+        <p>Enter the proximal intertarsal joint <b>separately, dorsomedially</b>, between the medial collateral ligament and the medial branch of the cranial tibial tendon. Only 56% of tarsitis cases recover — say so before you start.</p></div>
+      <details class="figwrap"><summary>Show figure</summary><div class="figslot"><img data-fig="hock-injection.png" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Tarsocrural"><span class="zoomhint"><svg viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27A6.47 6.47 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zM9.5 14C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14zm.5-7H9v2H7v1h2v2h1v-2h2V9h-2z"/></svg>tap</span></div></details>
+      <div class="src">Nuss et al., Pt 2, 2002 · Lardé et al., Vet Surg 2017 · Kofler &amp; Altenbrunner-Martinek 2008 · Meier 1997 · Budras pp. 28, 135</div>
+    </div>
+  </article>
+
+  <article class="jcard" data-j>
+    <div class="jhead"><div class="num">4</div>
+      <div class="t"><b>Distal tarsal joints</b><span>Centrodistal · tarsometatarsal</span></div>
+      <svg class="chev" viewBox="0 0 24 24"><path d="M7.4 8.6 12 13.2l4.6-4.6L18 10l-6 6-6-6z"/></svg></div>
+    <div class="jbody">
+      <div class="field"><h4><svg class="ic" viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20z"/></svg>Palpate</h4>
+        <p>Narrow spaces on the <span class="anat">dorsomedial distal tarsus</span>. Swelling barely visible — this is a radiographic diagnosis.</p></div>
+      <div class="field"><h4><svg class="ic" viewBox="0 0 24 24"><path d="M20.7 5.3 18.7 3.3a1 1 0 0 0-1.4 0l-2.3 2.3 3.4 3.4 2.3-2.3a1 1 0 0 0 0-1.4zM3 17.2V21h3.8L17.4 10.4 13.6 6.6 3 17.2z"/></svg>Needle</h4>
+        <p>20 G short, <b>dorsomedial, perpendicular to the long axis</b>. Expect drops only.</p></div>
+      <div class="field"><h4><svg class="ic" viewBox="0 0 24 24"><path d="M12 2 4 7v10l8 5 8-5V7l-8-5z"/></svg>Then</h4>
+        <p>TMT communicates with the distal intertarsal. <b>Tarsocrural does not reach either</b> — lavaging it does nothing down here.</p></div>
+      <div class="field"><h4><svg class="ic" viewBox="0 0 24 24"><path d="M12 2s6 6.5 6 11a6 6 0 0 1-12 0c0-4.5 6-11 6-11z"/></svg>Lavage</h4>
+        <p>Too small for meaningful through-and-through lavage. Aim is a sample.</p></div>
+      <div class="field pit"><h4><svg class="ic" viewBox="0 0 24 24"><path d="M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z"/></svg>Watch out</h4>
+        <p>Most lesions here are bone, not synovium — osteomyelitis or sequestrum, and in old cows “bovine spavin”. Two orthogonal films beat a tap.</p></div>
+      <details class="figwrap"><summary>Show figure</summary><div class="figslot"><img data-fig="hock-synovial-medial.png" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Distal tarsal joints"><span class="zoomhint"><svg viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27A6.47 6.47 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zM9.5 14C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14zm.5-7H9v2H7v1h2v2h1v-2h2V9h-2z"/></svg>tap</span></div></details>
+      <div class="src">Nuss et al., Pt 2, 2002 · Kofler et al., Vet Clin Food Anim 2014 · Budras pp. 28, 135</div>
+    </div>
+  </article>
+
+  <article class="jcard" data-j>
+    <div class="jhead"><div class="num">5</div>
+      <div class="t"><b>Tarsal sheath</b><span>Deep flexor sheath at the tarsus</span></div>
+      <svg class="chev" viewBox="0 0 24 24"><path d="M7.4 8.6 12 13.2l4.6-4.6L18 10l-6 6-6-6z"/></svg></div>
+    <div class="jbody">
+      <div class="field"><h4><svg class="ic" viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20z"/></svg>Palpate</h4>
+        <p>Elongated distension <span class="anat">medioplantar to the calcaneus</span>, running proximodistally. Equine equivalent: thoroughpin.</p></div>
+      <div class="field"><h4><svg class="ic" viewBox="0 0 24 24"><path d="M20.7 5.3 18.7 3.3a1 1 0 0 0-1.4 0l-2.3 2.3 3.4 3.4 2.3-2.3a1 1 0 0 0 0-1.4zM3 17.2V21h3.8L17.4 10.4 13.6 6.6 3 17.2z"/></svg>Needle</h4>
+        <p>18 G into the most distended part of the lumen, <b>under ultrasound</b>, avoiding the <span class="anat">medial saphenous vessels</span>.</p></div>
+      <div class="field"><h4><svg class="ic" viewBox="0 0 24 24"><path d="M12 2 4 7v10l8 5 8-5V7l-8-5z"/></svg>Then</h4>
+        <p>Second portal at the opposite end of the lumen.</p></div>
+      <div class="field"><h4><svg class="ic" viewBox="0 0 24 24"><path d="M12 2s6 6.5 6 11a6 6 0 0 1-12 0c0-4.5 6-11 6-11z"/></svg>Lavage</h4>
+        <p><span class="num">1–2 L</span> ± povidone-iodine <span class="num">0.1%</span></p></div>
+      <div class="field pit"><h4><svg class="ic" viewBox="0 0 24 24"><path d="M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z"/></svg>Watch out</h4>
+        <p>In 97 cattle with a swollen hock the differentials included <b>vein thrombosis</b>. Puncturing a thrombosed vein is an avoidable error.</p></div>
+      <details class="figwrap"><summary>Show figure</summary><div class="figslot"><img data-fig="hock-synovial-lateral.png" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Tarsal sheath"><span class="zoomhint"><svg viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27A6.47 6.47 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zM9.5 14C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14zm.5-7H9v2H7v1h2v2h1v-2h2V9h-2z"/></svg>tap</span></div></details>
+      <div class="src">Nuss &amp; Maierl, TPG 2000 · Kofler &amp; Altenbrunner-Martinek, BMTW 2008 · Budras p. 28</div>
+    </div>
+  </article>
+
+  <article class="jcard" data-j>
+    <div class="jhead"><div class="num">6</div>
+      <div class="t"><b>Calcanean bursae</b><span>Subtendinous · subcutaneous</span></div>
+      <svg class="chev" viewBox="0 0 24 24"><path d="M7.4 8.6 12 13.2l4.6-4.6L18 10l-6 6-6-6z"/></svg></div>
+    <div class="jbody">
+      <div class="field"><h4><svg class="ic" viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20z"/></svg>Palpate</h4>
+        <p><b>Subtendinous (retrocalcaneal)</b> — constant, between SDF tendon and the gastrocnemius insertion on the <span class="anat">tuber calcanei</span>. The one that matters.</p><p>Lumen runs <span class="num">9 cm</span> proximal and <span class="num">7 cm</span> distal to the tuber; lies <span class="num">8–10 mm</span> under the skin.</p><p>Talks to the bursa tendinis calcanei in <b>100%</b> of cases, to the subcutaneous bursa in <b>39%</b>.</p></div>
+      <div class="field"><h4><svg class="ic" viewBox="0 0 24 24"><path d="M20.7 5.3 18.7 3.3a1 1 0 0 0-1.4 0l-2.3 2.3 3.4 3.4 2.3-2.3a1 1 0 0 0 0-1.4zM3 17.2V21h3.8L17.4 10.4 13.6 6.6 3 17.2z"/></svg>Needle</h4>
+        <p>Via the wound tract after debridement, or into the effusion under a 7.5 MHz probe. Sedate <span class="num">0.05 mg/kg</span> xylazine, tourniquet <span class="num">15 cm</span> above the tuber, procaine into the <span class="anat">lateral plantar metatarsal vein</span>.</p></div>
+      <div class="field"><h4><svg class="ic" viewBox="0 0 24 24"><path d="M12 2 4 7v10l8 5 8-5V7l-8-5z"/></svg>Then</h4>
+        <p><b>Three drainage portals</b>, <span class="num">15 mm</span> each: <b>proximolateral, proximomedial, laterodistal</b>. Curette through each.</p></div>
+      <div class="field"><h4><svg class="ic" viewBox="0 0 24 24"><path d="M12 2s6 6.5 6 11a6 6 0 0 1-12 0c0-4.5 6-11 6-11z"/></svg>Lavage</h4>
+        <p><span class="num">2–3 L</span> saline + povidone-iodine <span class="num">0.1%</span> · drain + foam · <span class="num">5 ml</span> ampicillin · relavage 2–3×/week for 3 weeks</p></div>
+      <div class="field pit"><h4><svg class="ic" viewBox="0 0 24 24"><path d="M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z"/></svg>Watch out</h4>
+        <p>Scan first for <b>SDF rupture</b> and a <b>rough contour of the tuber</b>. Bursitis alone: 15/18 recovered, median survival <span class="num">23 months</span>. With bone involvement it is a different disease.</p></div>
+      <details class="figwrap"><summary>Show figure</summary><div class="figslot"><img data-fig="calcanean-bursa.png" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Calcanean bursae"><span class="zoomhint"><svg viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27A6.47 6.47 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zM9.5 14C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14zm.5-7H9v2H7v1h2v2h1v-2h2V9h-2z"/></svg>tap</span></div></details>
+      <div class="src">Kofler &amp; Sullmann, <i>Animals</i> 2021;11:1446 (CC BY) · Kofler, Erlacher &amp; Pagliosa, TPG 2019 · Budras pp. 28, 135–136</div>
+    </div>
+  </article>
+
+  <p class="nores" style="display:none;text-align:center;color:var(--muted);font-size:.88rem;padding:22px 0">Nothing matches</p>
+</section>
+
+<section class="view" id="fluid">
+
+  <div class="block">
+    <h3><svg class="ic" viewBox="0 0 24 24"><path d="M12 2s6 6.5 6 11a6 6 0 0 1-12 0c0-4.5 6-11 6-11z"/></svg>Read it on the spot</h3>
+    <div class="step"><div class="dot d-green"></div><div class="sc"><b>Serous &middot; serofibrinous</b><span>Clear to slightly turbid, small clots. <b>Lavage.</b></span></div></div>
+    <div class="step"><div class="dot d-amber"></div><div class="sc"><b>Fibrinous</b><span>Heavy gelatinous fibrin. <b>Arthrotomy</b> &mdash; needles will not clear it.</span></div></div>
+    <div class="step"><div class="dot d-red"></div><div class="sc"><b>Purulent</b><span>Arthrotomy, resection, or cull.</span></div></div>
+    <div class="alert"><b>Any turbidity = infection.</b> In cattle, inflammatory joint disease is septic until proven otherwise.</div>
+  </div>
+
+  <div class="block">
+    <h3><svg class="ic" viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20z"/></svg>Three tailgate tests</h3>
+    <h5>Clarity</h5>
+    <p>Normal is colourless to pale yellow and you can read print through it.</p>
+    <h5>String</h5>
+    <p>Let a drop fall from the hub. Normal draws a string of about <span class="num">2 cm</span>. Falls like water = hyaluronan gone = inflammation.</p>
+    <h5>Clot</h5>
+    <p>Turbid fluid that clots completely within about <span class="num">15 min</span> is fibrinous arthritis.</p>
+  </div>
+
+  <div class="block">
+    <h3><svg class="ic" viewBox="0 0 24 24"><path d="M3 13h2v-2H3v2zm0 4h2v-2H3v2zm0-8h2V7H3v2zm4 4h14v-2H7v2zm0 4h14v-2H7v2zM7 7v2h14V7H7z"/></svg>Numbers</h3>
+    <table class="cmp">
+      <tr><th>&nbsp;</th><th>Cells/&micro;L</th><th>Neut.</th><th>Protein</th></tr>
+      <tr><td>Normal</td><td>&lt;1,000</td><td>&lt;10%</td><td>&lt;2.5</td></tr>
+      <tr><td>Degenerative</td><td>219</td><td>7%</td><td>2.5</td></tr>
+      <tr><td>Traumatic</td><td>1,160</td><td>35%</td><td>3.4</td></tr>
+      <tr><td>Septic</td><td>62,880</td><td>94%</td><td>5.6</td></tr>
+    </table>
+    <p style="margin-top:8px;font-size:.76rem;color:var(--muted)">Means, from 130 cattle. Protein in g/dL.</p>
+    <div class="note"><b>Chuteside:</b> protein over <span class="num">4.5 g/dL</span> is suggestive; over <span class="num">25,000 cells</span> with <span class="num">80%</span> neutrophils is diagnostic.</div>
+    <div class="alert"><b>They overlap.</b> Septic starts as low as 1,250 and traumatic reaches 40,000. Weigh the count against protein, appearance and history.</div>
+  </div>
+
+  <div class="block">
+    <h3><svg class="ic" viewBox="0 0 24 24"><path d="M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z"/></svg>A dry tap is a finding</h3>
+    <p>Fibrin can be solid enough that nothing aspirates. On ultrasound it is hypo- to echoic with <b>no flow</b>. A dry tap in a <b>distended</b> joint is positive, not negative.</p>
+    <p>Inject <span class="num">2&ndash;3 ml</span> saline and re-aspirate &mdash; usually enough for cytology and culture.</p>
+    <div class="note"><b>First sample only.</b> Repeat taps and a single lavage change the cytology themselves.</div>
+  </div>
+
+  <div class="block">
+    <h3><svg class="ic" viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>Three swellings, one leg</h3>
+    <table class="cmp">
+      <tr><th>&nbsp;</th><th>Shape</th><th>Catch</th></tr>
+      <tr><td>Joint</td><td>Round, centred, fills set recesses</td><td>Know which recesses connect</td></tr>
+      <tr><td>Sheath</td><td>Long, follows the tendon</td><td>May join the joint capsule</td></tr>
+      <tr><td>Bursa</td><td>Over a bony point, superficial</td><td>May be filling <i>because</i> of the joint</td></tr>
+    </table>
+    <div class="alert"><b>Ultrasound before every puncture.</b> It is the only thing that separates arthritis, bursitis, tenosynovitis, abscess and vein thrombosis.</div>
+    <div class="src" style="margin-top:12px">Rhode et al., Vet Surg 2000 (130 cases) &middot; eClinPath, Cornell &middot; Jennings, AABP 2024</div>
+  </div>
+
+</section>
+
+<section class="view" id="prep">
+
+  <div class="block">
+    <h3><svg class="ic" viewBox="0 0 24 24"><path d="M19 8h-1V3H6v5H5a3 3 0 0 0-3 3v6h4v4h12v-4h4v-6a3 3 0 0 0-3-3zM8 5h8v3H8V5zm8 14H8v-5h8v5z"/></svg>Drugs</h3>
+    <h5>Sedation</h5>
+    <p>Xylazine <span class="num">0.05 mg/kg</span>, lateral recumbency.</p>
+    <h5>Fetlock &middot; carpus &middot; tarsus &middot; digit</h5>
+    <p><b>IVRA + IVRLP.</b> Tourniquet on <span class="anat">MC/MT III and IV</span>; inject the <span class="anat">cranial branch of the saphenous vein</span>, or any larger vein distal to it.</p>
+    <div class="alert">Tourniquet at the <span class="anat">calcaneal groove</span> must be <b>padded with coarse calico</b>, or the vessels there stay open and the block fails.</div>
+    <h5>Stifle &middot; hip</h5>
+    <p>Epidural: procaine or lidocaine <span class="num">0.4 ml/kg</span>, or xylazine <span class="num">0.1 mg/kg</span> made up to <span class="num">0.4 ml/kg</span> with saline.</p>
+    <h5>Calves</h5>
+    <p>GA: xylazine <span class="num">0.1 mg/kg</span> + ketamine <span class="num">2 mg/kg</span> IV.</p>
+  </div>
+
+  <div class="block">
+    <h3><svg class="ic" viewBox="0 0 24 24"><path d="M9 11.75a1.25 1.25 0 1 0 0 2.5 1.25 1.25 0 0 0 0-2.5zm6 0a1.25 1.25 0 1 0 0 2.5 1.25 1.25 0 0 0 0-2.5zM12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20z"/></svg>The feel</h3>
+    <p><b>Skin</b> (firm, gritty) &rarr; <b>capsule</b> (second distinct resistance, often a soft give) &rarr; <b>in</b> (resistance gone, needle swims).</p>
+    <p>Hold the <b>hub, not the syringe</b>, while advancing. A syringe hides the feel.</p>
+    <p>In a tight joint fluid wells up on its own &mdash; collect that before attaching anything.</p>
+    <p>Flow stops suddenly? Villi in the bevel. Release, rotate a few degrees, draw again.</p>
+    <p>Hit bone? Withdraw a few mm, re-angle, advance. Do not fan while deep &mdash; it scores cartilage.</p>
+  </div>
+
+  <div class="block">
+    <h3><svg class="ic" viewBox="0 0 24 24"><path d="M12 2 4 7v10l8 5 8-5V7l-8-5z"/></svg>Is it open?</h3>
+    <p>Enter through <b>clean intact skin away from the wound</b>. Never through the wound.</p>
+    <p><b>Intact joint pressurises</b> &mdash; after a few ml it is hard to push. <b>Breached joint never builds pressure</b>, and fluid appears at the wound.</p>
+    <p>Sheaths resist distension poorly; bandage above and below to narrow the space first.</p>
+  </div>
+
+  <div class="block">
+    <h3><svg class="ic" viewBox="0 0 24 24"><path d="m20.71 5.63-2.34-2.34a1 1 0 0 0-1.41 0l-3.12 3.12 3.75 3.75 3.12-3.12a1 1 0 0 0 0-1.41zM3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25z"/></svg>Kit</h3>
+    <ul>
+      <li>Two cannulas, <span class="num">1.6&ndash;2.0 mm</span> lumen</li>
+      <li><span class="num">1&ndash;4 L</span> 0.9% NaCl &plusmn; povidone-iodine <span class="num">0.1%</span></li>
+      <li>Syringes ready <b>before</b> fluid runs</li>
+      <li>Clip, full prep, sterile gloves</li>
+    </ul>
+    <div class="alert"><b>Lavage until the efflux is clear and fibrin-free</b> &mdash; not until the bag is empty.</div>
+  </div>
+
+  <div class="block">
+    <h3><svg class="ic" viewBox="0 0 24 24"><path d="M12 2 4 7v10l8 5 8-5V7l-8-5z"/></svg>After</h3>
+    <ul>
+      <li>Intra-articular ceftiofur or penicillin</li>
+      <li>Gentamicin collagen sponge, optional</li>
+      <li>Portals may stay open for repeat lavage</li>
+      <li>Relavage judged on gross fluid, weight bearing and swelling</li>
+    </ul>
+  </div>
+
+</section>
+
+<section class="view" id="decide">
+
+  <div class="block">
+    <h3><svg class="ic" viewBox="0 0 24 24"><path d="M12 2 4 7v10l8 5 8-5V7l-8-5z"/></svg>Pick the treatment</h3>
+    <div class="step"><div class="dot d-green"></div><div class="sc"><b>Antibiotics alone</b><span><b>Haematogenous only</b>, started within 2&ndash;4 days. No clear improvement in 36&ndash;48 h &rarr; go local.</span></div></div>
+    <div class="step"><div class="dot d-green"></div><div class="sc"><b>Lavage</b><span>Serous or serofibrinous with small clots. Two cannulas, 1&ndash;4 L.</span></div></div>
+    <div class="step"><div class="dot d-amber"></div><div class="sc"><b>Arthrotomy</b><span>Clotted fibrin, pus, or a penetrating wound. Same sites as arthrocentesis.</span></div></div>
+    <div class="step"><div class="dot d-amber"></div><div class="sc"><b>Arthroscopy</b><span>Early serous cases only. Needs kit and GA or epidural.</span></div></div>
+    <div class="step"><div class="dot d-red"></div><div class="sc"><b>Resection / arthrodesis</b><span>Chronic pus with subchondral bone infection. DIP and PIP routinely; fetlock and carpus only, of the proximal joints.</span></div></div>
+  </div>
+
+  <div class="block">
+    <h3><svg class="ic" viewBox="0 0 24 24"><path d="M3 13h2v-2H3v2zm0 4h2v-2H3v2zm0-8h2V7H3v2zm4 4h14v-2H7v2zm0 4h14v-2H7v2zM7 7v2h14V7H7z"/></svg>Always alongside</h3>
+    <ul>
+      <li><b>Antibiotics at least 2 weeks</b>, sometimes 4. Cutting it short is how these fail.</li>
+      <li>Proven synovial and bone penetration: penicillin, ampicillin, cephalosporins, aminoglycosides, oxytetracycline, fluoroquinolones, sulfonamides.</li>
+      <li><b>NSAIDs 3 days</b> &mdash; flunixin, ketoprofen, carprofen, meloxicam. Also restores feed intake.</li>
+      <li>Combine systemic with IVRLP of the same drug.</li>
+    </ul>
+  </div>
+
+  <div class="block">
+    <h3><svg class="ic" viewBox="0 0 24 24"><path d="M16 11c1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3 1.34 3 3 3zm-8 0c1.66 0 3-1.34 3-3S9.66 5 8 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg>Before you commit</h3>
+    <p>Prognosis turns on: the primary cause, mono- vs polyarthritis, type of effusion, <b>which structure</b>, concurrent osteomyelitis, disease elsewhere.</p>
+    <div class="alert"><b>The tarsus is the outlier.</b> Every treated fetlock, carpal and stifle infection healed in one series &mdash; only <b>56%</b> of tarsitis did. Have that conversation first.</div>
+    <div class="note">Full orthopaedic exam plus ultrasound <b>before</b> choosing treatment or culling, not after.</div>
+  </div>
+
+  <div class="block">
+    <h3><svg class="ic" viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>Calves</h3>
+    <p>In a calf with septic arthritis, <b>examine the umbilicus</b>.</p>
+    <ul>
+      <li>Colostrum within 6 h, and check serum Ig</li>
+      <li>Navel disinfection</li>
+      <li>Avoid lung and gut infection</li>
+    </ul>
+  </div>
+
+</section>
+
+</main>
+
+<div id="lb" aria-hidden="true">
+  <div class="lbbar">
+    <span class="lbcap" id="lbcap"></span>
+    <button id="lbzoom">Zoom in</button>
+    <button id="lbclose">Close</button>
+  </div>
+  <div class="lbinner"><img id="lbimg" alt=""></div>
+</div>
+
+<footer>
+  <div class="line"></div>
+  <b>Synoviocentesis &amp; Lavage in Cattle</b><br>
+  Draft for review. Schematics are orientation aids, not anatomical plates.<br>
+  Photographic figures load from <code>img/</code> and are not distributed with this file.<br>
+  Verify against Nuss et al., <i>Arthrocentesis in cattle</i> Pt 1 &amp; 2, and<br>
+  Desrochers &amp; Francoz, <i>Vet Clin North Am Food Anim Pract</i> 2014, before clinical use.
+</footer>
+
+<script>
+(function(){
+  var tabs=document.querySelectorAll('nav.tabs button, nav.tabs2 button'), views=document.querySelectorAll('.view');
+  tabs.forEach(function(b){
+    b.addEventListener('click',function(){
+      tabs.forEach(function(x){x.classList.remove('on')});
+      views.forEach(function(v){v.classList.remove('on')});
+      b.classList.add('on');
+      document.getElementById(b.dataset.v).classList.add('on');
+      b.scrollIntoView({block:'nearest',inline:'center',behavior:'smooth'});
+      window.scrollTo({top:0,behavior:'smooth'});
+    });
+  });
+
+  document.addEventListener('click',function(e){
+    var h=e.target.closest && e.target.closest('.jhead');
+    if(h){ h.parentElement.classList.toggle('open'); }
+  });
+
+  // each limb tab filters only its own cards
+  document.querySelectorAll('.search-wrap .q').forEach(function(q){
+    var sec=q.closest('.view');
+    q.addEventListener('input',function(){
+      var t=q.value.trim().toLowerCase(), found=0;
+      sec.querySelectorAll('[data-j]').forEach(function(c){
+        var hit=!t||c.textContent.toLowerCase().indexOf(t)>-1;
+        c.style.display=hit?'':'none';
+        if(hit&&t)c.classList.add('open');
+        if(hit)found++;
+      });
+      var lead=sec.querySelector('.seclead'); if(lead) lead.style.display=t?'none':'';
+      var nr=sec.querySelector('.nores'); if(nr) nr.style.display=found?'none':'block';
+    });
+  });
+
+  // tap a plate to see it full screen
+  var lb=document.getElementById('lb'), lbimg=document.getElementById('lbimg'),
+      lbcap=document.getElementById('lbcap'), lbz=document.getElementById('lbzoom');
+  function closeLb(){ if(lb){lb.classList.remove('on');document.body.style.overflow='';} }
+  document.addEventListener('click',function(e){
+    var im=e.target.closest && e.target.closest('.figslot img');
+    if(im&&lb){
+      lbimg.src=im.getAttribute('src');
+      lbcap.textContent=im.getAttribute('alt')||'';
+      lb.classList.remove('wide'); lb.classList.add('on','fit');
+      if(lbz) lbz.textContent='Zoom in';
+      lb.scrollTop=0; document.body.style.overflow='hidden';
+      return;
+    }
+    if(e.target.id==='lbclose'||e.target.id==='lb'||(e.target.classList&&e.target.classList.contains('lbinner'))) closeLb();
+  });
+  if(lbz) lbz.addEventListener('click',function(e){
+    e.stopPropagation();
+    var w=lb.classList.toggle('wide');
+    lb.classList.toggle('fit',!w);
+    lbz.textContent=w?'Fit width':'Zoom in';
+    if(w) lb.scrollLeft=(lb.scrollWidth-lb.clientWidth)/2;
+  });
+  document.addEventListener('keydown',function(e){ if(e.key==='Escape') closeLb(); });
+})();
+
+/* ============ figure store: load once, remembered on this device ============ */
+(function(){
+  var DBN='sgfigs', STORE='f';
+  var bar=document.getElementById('figbar'), ok=document.getElementById('figok'),
+      okt=document.getElementById('figokt'), inp=document.getElementById('figin'),
+      btn=document.getElementById('figbtn'), clr=document.getElementById('figclear');
+
+  function idb(){return new Promise(function(res,rej){
+    var rq; try{rq=indexedDB.open(DBN,1);}catch(e){return rej(e);}
+    rq.onupgradeneeded=function(){rq.result.createObjectStore(STORE);};
+    rq.onsuccess=function(){res(rq.result);};
+    rq.onerror=function(){rej(rq.error);};});}
+  function put(v){return idb().then(function(db){return new Promise(function(res,rej){
+    var tx=db.transaction(STORE,'readwrite');tx.objectStore(STORE).put(v,'set');
+    tx.oncomplete=function(){res(true);};tx.onerror=function(){rej(tx.error);};});});}
+  function get(){return idb().then(function(db){return new Promise(function(res,rej){
+    var rq=db.transaction(STORE,'readonly').objectStore(STORE).get('set');
+    rq.onsuccess=function(){res(rq.result||null);};rq.onerror=function(){rej(rq.error);};});});}
+  function del(){return idb().then(function(db){return new Promise(function(res){
+    var tx=db.transaction(STORE,'readwrite');tx.objectStore(STORE).delete('set');
+    tx.oncomplete=function(){res();};tx.onerror=function(){res();};});});}
+
+  var sandboxedEarly=false;
+  try{ sandboxedEarly = (window.self!==window.top); }catch(e){ sandboxedEarly=true; }
+
+  function slots(){
+    return Array.prototype.slice.call(document.querySelectorAll('.figslot img[data-fig]'));
+  }
+  function norm(n){return n.replace(/\.[^.]+$/,'').toLowerCase().replace(/[^a-z0-9]/g,'');}
+
+  function apply(store){
+    var n=0;
+    slots().forEach(function(img){
+      var want=img.getAttribute('data-fig'), d=store[want];
+      if(!d){ for(var k in store){ if(norm(k)===norm(want)){ d=store[k]; break; } } }
+      if(d){ img.src=d; n++; var sl=img.closest('.figslot'); if(sl){ sl.classList.add('ready'); var fw=sl.closest('.figwrap'); if(fw) fw.classList.add('ready'); } }
+    });
+    return n;
+  }
+
+  function show(n,total){
+    bar.classList.remove('on');
+    ok.classList.add('on');
+    okt.innerHTML='<b>'+n+' of '+total+' figures</b> loaded on this device';
+  }
+  function askFor(){
+    bar.classList.add('on'); ok.classList.remove('on');
+    if(sandboxedEarly){
+      bar.style.background='#fbeded'; bar.style.borderBottomColor='#eccccb';
+      bar.style.color='#9e4440';
+      bar.innerHTML='<span class="fb-t"><b>You are viewing this in a preview.</b> '
+        +'Figures can\'t be added here \u2014 download the file and open it from your device.</span>';
+    }
+  }
+
+  /* --- zip reading, so filenames survive any transfer --- */
+  function inflate(buf){
+    if(typeof DecompressionStream==='undefined') return Promise.reject(0);
+    return new Response(new Blob([buf]).stream()
+      .pipeThrough(new DecompressionStream('deflate-raw'))).arrayBuffer();
+  }
+  function readZip(file){
+    return file.arrayBuffer().then(function(ab){
+      var dv=new DataView(ab),u8=new Uint8Array(ab),e=-1;
+      for(var i=u8.length-22;i>=0&&i>u8.length-66000;i--){
+        if(dv.getUint32(i,true)===0x06054b50){e=i;break;}}
+      if(e<0) throw 0;
+      var n=dv.getUint16(e+10,true),p=dv.getUint32(e+16,true),out=[];
+      for(var c=0;c<n;c++){
+        if(dv.getUint32(p,true)!==0x02014b50) break;
+        var meth=dv.getUint16(p+10,true),cs=dv.getUint32(p+20,true),
+            nl=dv.getUint16(p+28,true),el=dv.getUint16(p+30,true),
+            cl=dv.getUint16(p+32,true),lho=dv.getUint32(p+42,true),
+            nm=new TextDecoder().decode(u8.subarray(p+46,p+46+nl));
+        p+=46+nl+el+cl;
+        if(/\/$/.test(nm)||/(^|\/)[._]/.test(nm)) continue;
+        if(!/\.(png|jpe?g|webp|gif|bmp|tiff?)$/i.test(nm)) continue;
+        var ln=dv.getUint16(lho+26,true),le=dv.getUint16(lho+28,true),st=lho+30+ln+le;
+        out.push({name:nm.split('/').pop(),meth:meth,raw:u8.subarray(st,st+cs)});
+      }
+      return out;
+    });
+  }
+  function toData(name,blob){
+    return new Promise(function(res){
+      var r=new FileReader();
+      r.onload=function(){res([name,r.result]);};
+      r.onerror=function(){res(null);};
+      r.readAsDataURL(blob);
+    });
+  }
+
+  var sandboxed=sandboxedEarly;
+
+  btn.addEventListener('click',function(){
+    if(sandboxed){
+      bar.innerHTML='<span class="fb-t"><b>Can\'t pick files inside a preview.</b> '
+        +'Download this file and open it from your device \u2014 then the button works.</span>';
+      return;
+    }
+    inp.click();
+  });
+  clr.addEventListener('click',function(){ del().then(askFor); });
+
+  inp.addEventListener('change',function(ev){
+    var files=Array.prototype.slice.call(ev.target.files);
+    if(!files.length) return;
+    okt.textContent='Reading…'; ok.classList.add('on'); bar.classList.remove('on');
+    var jobs=[];
+    files.forEach(function(f){
+      if(/\.zip$/i.test(f.name)){
+        jobs.push(readZip(f).then(function(en){
+          return Promise.all(en.map(function(x){
+            var p = x.meth===0
+              ? Promise.resolve(x.raw.buffer.slice(x.raw.byteOffset,x.raw.byteOffset+x.raw.length))
+              : inflate(x.raw);
+            return p.then(function(b){return toData(x.name,new Blob([b]));});
+          }));
+        }).catch(function(){ return []; }));
+      } else { jobs.push(toData(f.name,f).then(function(r){return [r];})); }
+    });
+    Promise.all(jobs).then(function(res){
+      var store={};
+      res.forEach(function(group){
+        (group||[]).forEach(function(pair){ if(pair) store[pair[0]]=pair[1]; });
+      });
+      var total=slots().length, n=apply(store);
+      put(store).then(function(){ show(n,total); })
+                .catch(function(){ show(n,total);
+                  okt.innerHTML+=' <span style="color:#9c6b2f">(not saved — this browser blocks storage)</span>'; });
+    });
+  });
+
+  /* on load: use what's stored, otherwise ask once */
+  var total=slots().length;
+  get().then(function(store){
+    if(store && Object.keys(store).length){
+      var n=apply(store);
+      if(n) show(n,total); else askFor();
+    } else { askFor(); }
+  }).catch(askFor);
+})();
+
+</script>
+</body>
+</html>
